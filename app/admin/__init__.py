@@ -1,21 +1,30 @@
 from flask import url_for, redirect, flash
-from flask_admin import Admin, BaseView, expose
+from flask_admin import BaseView, expose, Admin, AdminIndexView
 from flask_admin.contrib.sqla import ModelView
-from flask_login import login_required, logout_user
+from flask_login import login_required, logout_user, current_user
 
 from ..models import Product, db, User
 
-admin = Admin()
+
+class CustomBaseView(BaseView):
+    def is_accessible(self):
+        return current_user.is_authenticated
 
 
-class AdminView(BaseView):
+class CustomModelView(ModelView):
+    def is_accessible(self):
+        return current_user.is_authenticated
+
+
+class IndexView(AdminIndexView):
     @expose('/')
-    @login_required
     def index(self):
-        pass
+        if not current_user.is_authenticated:
+            return redirect(url_for('main.login'))
+        return redirect(url_for('product.index_view'))
 
 
-class LogoutView(BaseView):
+class LogoutView(CustomBaseView):
     @expose('/')
     @login_required
     def logout(self):
@@ -24,6 +33,8 @@ class LogoutView(BaseView):
         return redirect(url_for('main.index'))
 
 
-admin.add_view(ModelView(Product, db.session))
-admin.add_view(ModelView(User, db.session))
+admin = Admin(index_view=IndexView())
+
+admin.add_view(CustomModelView(Product, db.session))
+admin.add_view(CustomModelView(User, db.session))
 admin.add_view(LogoutView(name='Logout', endpoint='logout'))

@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, redirect, url_for, flash
 from flask_login import LoginManager, login_user
 
 from ..main.forms import LoginForm
-from ..models import User
+from ..models import User, Product
 
 main = Blueprint('main', __name__)
 
@@ -12,7 +12,8 @@ login_manager.login_view = 'main.login'
 
 @main.route('/')
 def index():
-    return render_template('index.html')  # products list
+    products = Product.query.all()
+    return render_template('index.html', products=products)
 
 
 @main.route('/login', methods=['GET', 'POST'])
@@ -24,9 +25,9 @@ def login():
 
         if user is not None and user.verify_password(form.password.data):
             login_user(user, form.remember_me.data)
-            redirect(url_for('admin.index'))
-        flash('Invalid username or password.')
+            return redirect(url_for('admin.index'))
 
+        flash('Invalid username or password.')
     return render_template('login.html', form=form)
 
 
