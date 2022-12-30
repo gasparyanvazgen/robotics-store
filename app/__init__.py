@@ -1,8 +1,8 @@
 from flask import Flask
 
 from app.models import db
-from .admin import admin as admin_blueprint
-from .main import main as main_blueprint
+from .admin import admin
+from .main import main as main_blueprint, login_manager
 
 
 def create_app():
@@ -12,6 +12,8 @@ def create_app():
     app.config.from_object('config.DevelopmentConfig')
 
     db.init_app(app)
+    login_manager.init_app(app)
+    admin.init_app(app)
 
     # Create the database tables if they don't exist
     with app.app_context():
@@ -20,6 +22,5 @@ def create_app():
 
     # blueprints
     app.register_blueprint(main_blueprint)
-    app.register_blueprint(admin_blueprint)
 
     return app
