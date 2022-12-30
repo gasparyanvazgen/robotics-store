@@ -2,8 +2,6 @@ from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from .main import login_manager
-
 db = SQLAlchemy()
 
 
@@ -15,15 +13,15 @@ class Product(db.Model):
     price = db.Column(db.Float, nullable=False)
     currency = db.Column(db.String(255), nullable=False)
     amount = db.Column(db.Integer, nullable=False)
-    description = db.Column(db.String(255))
+    description = db.Column(db.Text)
 
     def __repr__(self):
         return f'<Product id={self.id} name={self.name} price={self.price} \
 currency={self.currency} amount={self.amount}>'
 
 
-class AdminUser(UserMixin, db.Model):
-    __tablename__ = 'admin_users'
+class User(UserMixin, db.Model):
+    __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), nullable=False)
@@ -42,9 +40,3 @@ class AdminUser(UserMixin, db.Model):
 
     def __repr__(self):
         return f'<AdminUser id={self.id} username={self.username}'
-
-
-@login_manager.user_loader
-def load_user(user_id):
-    # return the user object for the user_id
-    return AdminUser.query.get(int(user_id))

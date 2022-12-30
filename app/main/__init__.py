@@ -1,8 +1,8 @@
-from flask import Blueprint, render_template, request
-from flask_login import LoginManager
+from flask import Blueprint, render_template, redirect, url_for, flash
+from flask_login import LoginManager, login_user
 
 from ..main.forms import LoginForm
-from ..models import AdminUser
+from ..models import User
 
 main = Blueprint('main', __name__)
 
@@ -20,7 +20,17 @@ def login():
     form = LoginForm()
 
     if form.validate_on_submit():
-        admin_user = AdminUser.query.filter_by(username=form.username.data).first()
-        if admin_user is not None and admin_user.verify_password(form.password.data):
+        user = User.query.filter_by(username=form.username.data).first()
 
-            pass
+        if user is not None and user.verify_password(form.password.data):
+            login_user(user, form.remember_me.data)
+            redirect(url_for('admin.index'))
+        flash('Invalid username or password.')
+
+    return render_template('login.html', form=form)
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    # return the user object for the user_id
+    return User.query.get(int(user_id))
