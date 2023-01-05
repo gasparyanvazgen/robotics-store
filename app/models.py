@@ -14,10 +14,11 @@ class Product(db.Model):
     currency = db.Column(db.String(255), nullable=False)
     amount = db.Column(db.Integer, nullable=False)
     description = db.Column(db.Text)
+    image = db.Column(db.String(255), nullable=False)
 
     def __repr__(self):
         return f'<Product id={self.id} name={self.name} price={self.price} \
-currency={self.currency} amount={self.amount}>'
+currency={self.currency} amount={self.amount} image={self.image}>'
 
 
 class User(UserMixin, db.Model):
@@ -29,7 +30,7 @@ class User(UserMixin, db.Model):
 
     @property
     def password(self):
-        raise AttributeError("password is not a readable attribute")
+        raise AttributeError('password is not a readable attribute')
 
     @password.setter
     def password(self, password):

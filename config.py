@@ -1,17 +1,15 @@
 import os
 import secrets
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+IMAGE_UPLOADS = os.path.join(BASE_DIR, 'app/static/img/uploads')
+
 
 class Config(object):
     DEBUG = False
     CSRF_ENABLED = True
     SECRET_KEY = secrets.token_hex(16)  # generate random key
-    MYSQL_USER = os.environ['MYSQL_USER']
-    MYSQL_PASSWORD = os.environ['MYSQL_PASSWORD']
-    MYSQL_HOST = os.environ['MYSQL_HOST']
-    DATABASE = os.environ['DATABASE']
-    SQLALCHEMY_DATABASE_URI = f'mysql+mysqlconnector://{MYSQL_USER}:{MYSQL_PASSWORD}@{MYSQL_HOST}/{DATABASE}'
-    # SQLALCHEMY_DATABASE_URI = 'mysql+mysqlconnector://robot:password@localhost:3306/website'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(BASE_DIR, 'database.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 

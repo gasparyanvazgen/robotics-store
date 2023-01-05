@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for, flash
-from flask_login import LoginManager, login_user
+from flask_login import LoginManager, login_user, current_user
 
 from ..main.forms import LoginForm
 from ..models import User, Product
@@ -20,6 +20,8 @@ def index():
 def login():
     form = LoginForm()
 
+    if current_user.is_authenticated:
+        return redirect(url_for('admin.index'))
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
 

@@ -1,17 +1,5 @@
 ## MEM task 755
 
-##### Before running
-Open CLI and to do these commands for you (examples for Linux/MacOS)
-```shell
-pip install -r requirements.txt
-
-export MYSQL_USER=root
-export MYSQL_PASSWORD=password
-export MYSQL_HOST=localhost:3306
-export DATABASE=mysql
-```
-<br/>
-
 #### Run program with one of these example:
 ```shell
 export FLASK_APP=run.py
