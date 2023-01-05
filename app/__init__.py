@@ -3,7 +3,7 @@ from flask import Flask
 from app.models import db, User
 from .admin import admin
 from .main import main as main_blueprint, login_manager
-
+from .errors import errors as errors_blueprint
 
 def create_app():
     app = Flask(__name__)
@@ -29,5 +29,6 @@ def create_app():
 
     # blueprints
     app.register_blueprint(main_blueprint)
+    app.register_blueprint(errors_blueprint)
 
     return app

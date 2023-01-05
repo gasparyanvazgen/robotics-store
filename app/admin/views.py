@@ -28,11 +28,8 @@ class CustomModelView(ModelView):
 
 
 class IndexView(AdminIndexView):
-    @expose('/')
-    def index(self):
-        if not current_user.is_authenticated:
-            return redirect(url_for('main.login'))
-        return redirect(url_for('product.index_view'))
+    def is_accessible(self):
+        return current_user.is_authenticated
 
 
 class ProductView(CustomModelView):
