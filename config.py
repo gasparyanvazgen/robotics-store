@@ -12,6 +12,9 @@ class Config(object):
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(BASE_DIR, 'database.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
+    USER = os.environ['USER']
+    PASSWORD = os.environ['PASSWORD']
+
 
 class ProductionConfig(Config):
     DEBUG = False

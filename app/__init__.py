@@ -17,15 +17,8 @@ def create_app():
 
     # Create the database tables if they don't exist
     with app.app_context():
-        db.drop_all()  # drop all tables
+        # db.drop_all()  # drop all tables
         db.create_all()  # create table if not exists
-
-        # add admin to the database - this is draft
-        user = User()
-        user.username = 'admin'
-        user.password = 'password'
-        db.session.add(user)
-        db.session.commit()
 
     # blueprints
     app.register_blueprint(main_blueprint)
