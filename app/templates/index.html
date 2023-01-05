@@ -8,7 +8,7 @@
       {% for product in products %}
       <div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
         <div class="card">
-          <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/4.webp" class="card-img-top" alt="{{ product.name }}" />
+          <img src="{{ url_for('static', filename='img/uploads/' + product.image) }}" class="card-img-top" alt="{{ product.name }}" />
             <div class="card-body">
               <div class="d-flex justify-content-between">
                 <p class="small"><a href="#!" class="text-muted">Category</a></p>
