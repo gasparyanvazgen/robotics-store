@@ -5,6 +5,16 @@ from werkzeug.security import generate_password_hash, check_password_hash
 db = SQLAlchemy()
 
 
+class Category(db.Model):
+    __tablename__ = 'categories'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255), nullable=False, unique=True)
+
+    def __repr__(self):
+        return f'<Category id={self.id} name={self.name}>'
+
+
 class Product(db.Model):
     __tablename__ = 'products'
 
@@ -16,9 +26,14 @@ class Product(db.Model):
     description = db.Column(db.Text)
     image = db.Column(db.String(255), nullable=False)
 
+    # a relationship between `product` and `category`
+    category_id = db.Column(db.Integer, db.ForeignKey('categories.id'), nullable=False)
+    category = db.relationship('Category')
+
     def __repr__(self):
         return f'<Product id={self.id} name={self.name} price={self.price} \
-currency={self.currency} amount={self.amount} image={self.image}>'
+currency={self.currency} amount={self.amount} image={self.image} \
+category_id={self.category_id} category={self.category}>'
 
 
 class User(UserMixin, db.Model):
