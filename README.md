@@ -26,6 +26,8 @@ flask run
 
 ```shell
 python3 run.py
+# OR
+gunicorn run:app
 ```
 
 In program default enabled DEBUG mode. You can change this in `create_app()` function at `app/__init__.py` file.

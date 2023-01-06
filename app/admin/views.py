@@ -48,8 +48,7 @@ class ProductView(CustomModelView):
                                   url_relative_path='img/uploads/',
                                   namegen=generate_random_image_name,
                                   allowed_extensions=['jpg', 'jpeg', 'png'],
-                                  max_size=(1200, 780, True))
-        # thumbnail_size=(500, 500, True))
+                                  max_size=(1000, 1000, False))
     }
 
 

@@ -21,7 +21,6 @@ class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False)
     price = db.Column(db.Float, nullable=False)
-    currency = db.Column(db.String(255), nullable=False)
     amount = db.Column(db.Integer, nullable=False)
     description = db.Column(db.Text)
     image = db.Column(db.String(255), nullable=False)
@@ -32,8 +31,8 @@ class Product(db.Model):
 
     def __repr__(self):
         return f'<Product id={self.id} name={self.name} price={self.price} \
-currency={self.currency} amount={self.amount} image={self.image} \
-category_id={self.category_id} category={self.category}>'
+amount={self.amount} image={self.image} category_id={self.category_id} \
+category={self.category}>'
 
 
 class User(UserMixin, db.Model):
