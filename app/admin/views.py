@@ -11,7 +11,7 @@ from werkzeug.security import generate_password_hash
 from config import IMAGE_UPLOADS
 
 
-# A function that will generate a filename from the model and the loaded file object.
+# Generates a filename from the model and the loaded file object
 def generate_random_image_name(model, file_data):
     random_hex = secrets.token_hex(8)
     return random_hex
@@ -23,6 +23,9 @@ class CustomBaseView(BaseView):
 
 
 class CustomModelView(ModelView):
+    # Enable data export for the view
+    can_export = True
+
     def is_accessible(self):
         return current_user.is_authenticated
 
@@ -33,13 +36,19 @@ class IndexView(AdminIndexView):
 
 
 class ProductView(CustomModelView):
-    def _list_thumbnail(self, context, model, name):
-        url = url_for('static', filename=os.path.join('img/uploads/', model.image))
-        return Markup(f'<img src={url} width="100">')
+    # show the description column in the details view
+    can_view_details = True
+    column_details_list = ['name', 'price', 'amount', 'description', 'image', 'category']
+
+    # hide the description column in the list view
+    column_exclude_list = ['description']
+
+    # customize columns for export
+    column_export_list = column_details_list
 
     # pass the _list_thumbnail function to the image_user field
     column_formatters = {
-        'image': _list_thumbnail
+        'image': lambda self, c, m, n: self._list_thumbnail(c, m, n)
     }
 
     form_extra_fields = {
@@ -50,6 +59,23 @@ class ProductView(CustomModelView):
                                   allowed_extensions=['jpg', 'jpeg', 'png'],
                                   max_size=(1000, 1000, False))
     }
+
+    def _list_thumbnail(self, context, model, name):
+        # Generate thumbnail image for model object
+        url = url_for('static', filename=os.path.join('img/uploads/', model.image))
+        return Markup(f'<img src={url} width="100">')
+
+    # Customize the data that is exported for the image and category columns
+    def get_export_value(self, model, column):
+        # Generate absolute URL with hostname included for image column
+        if column == 'image':
+            return url_for('static', filename=os.path.join('img/uploads/', model.image), _external=True)
+        # Return name of category for category column
+        if column == 'category':
+            return model.category.name
+
+        # Return default value for other columns
+        return super(ProductView, self).get_export_value(model, column)
 
 
 class UserView(CustomModelView):
