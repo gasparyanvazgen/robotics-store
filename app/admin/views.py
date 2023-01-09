@@ -38,6 +38,12 @@ class IndexView(AdminIndexView):
 
 
 class ProductView(CustomModelView):
+    # add search field
+    column_searchable_list = ['name']
+
+    # set the name of the search field
+    column_search_name = 'name'
+
     # show the description column in the details view
     can_view_details = True
     column_details_list = ['name', 'price', 'amount', 'description', 'image', 'category']
