@@ -80,9 +80,6 @@ class ProductView(CustomModelView):
         # Generate absolute URL with hostname included for image column
         if column == 'image':
             return url_for('static', filename=os.path.join('img/uploads/', model.image), _external=True)
-        # Return name of category for category column
-        if column == 'category':
-            return model.category.name
 
         # Return default value for other columns
         return super(ProductView, self).get_export_value(model, column)
