@@ -7,6 +7,8 @@ from flask_admin.contrib.sqla import ModelView
 from flask_admin.form import ImageUploadField
 from flask_login import current_user, login_required, logout_user
 from werkzeug.security import generate_password_hash
+from wtforms import IntegerField, DecimalField
+from wtforms.validators import NumberRange
 
 from config import IMAGE_UPLOADS
 
@@ -52,6 +54,8 @@ class ProductView(CustomModelView):
     }
 
     form_extra_fields = {
+        'price': DecimalField('Amount', validators=[NumberRange(min=0)]),
+        'amount': IntegerField('Amount', validators=[NumberRange(min=0)]),
         'image': ImageUploadField('Upload image',
                                   base_path=IMAGE_UPLOADS,
                                   url_relative_path='img/uploads/',

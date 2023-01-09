@@ -20,7 +20,9 @@
               </div>
 
               <div class="d-flex justify-content-between mb-2">
-                <p class="text-muted mb-0">Available: <span class="fw-bold">{{ product.amount }}</span></p>
+                <p class="text-muted mb-0">
+                  {% if product.amount %}Առկա է{% else %}Առկա չէ{% endif %}
+                </p>
               </div>
             </div>
           </div>
