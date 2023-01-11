@@ -11,6 +11,12 @@ class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False, unique=True)
 
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+        }
+
     def __str__(self):
         return self.name
 
@@ -31,6 +37,18 @@ class Product(db.Model):
     # a relationship between `product` and `category`
     category_id = db.Column(db.Integer, db.ForeignKey('categories.id'), nullable=False)
     category = db.relationship('Category')
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'price': self.price,
+            'amount': self.amount,
+            'description': self.description,
+            'image': self.image,
+            'category_id': self.category_id,
+            'category': self.category.to_dict() if self.category else None
+        }
 
     def __repr__(self):
         return f'<Product id={self.id} name={self.name} price={self.price} \

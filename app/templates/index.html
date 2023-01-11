@@ -4,6 +4,25 @@
 {% block content %}
 <section style="background-color: #eee;">
   <div class="container py-5">
+    <div class="form-group">
+      <label for="categorySelect">Ցուցադրել ապրանքը ըստ տեսակի՝</label>
+      <select class="form-control" id="categorySelect">
+        <option value="0" selected>Բոլորը</option>
+        {% for category in categories %}
+        <option value="{{ category.id }}">{{ category.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <br>
+    <div class="form-group">
+      <label for="availabilitySelect">Ցուցադրել ապրանքներից՝</label>
+      <select class="form-control" id="availabilitySelect">
+        <option value="0">Բոլորը</option>
+        <option value="1">Միայն առկաները</option>
+      </select>
+    </div>
+    <br><br>
+
     <div class="row">
       {% for product in products %}
       <div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
@@ -11,7 +30,7 @@
           <img src="{{ url_for('static', filename='img/uploads/' + product.image) }}" class="card-img-top" alt="{{ product.name }}" />
             <div class="card-body">
               <div class="d-flex justify-content-between">
-                <p class="small"><a href="#!" class="text-muted">{{ product.category.name }}</a></p>
+                <p class="small">{{ product.category.name }}</p>
               </div>
 
               <div class="d-flex justify-content-between mb-3">
@@ -25,10 +44,15 @@
                 </p>
               </div>
             </div>
-          </div>
+        </div>
       </div>
       {% endfor %}
     </div>
   </div>
 </section>
+{% endblock %}
+
+{% block javascript %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{{ url_for('static', filename='js/filter.js') }}"></script>
 {% endblock %}
