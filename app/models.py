@@ -32,7 +32,7 @@ class Product(db.Model):
     price = db.Column(db.Float, nullable=False)
     amount = db.Column(db.Integer, nullable=False)
     description = db.Column(db.Text)
-    image = db.Column(db.String(255), nullable=False)
+    image = db.Column(db.String(255))
 
     # a relationship between `product` and `category`
     category_id = db.Column(db.Integer, db.ForeignKey('categories.id'), nullable=False)

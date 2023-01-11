@@ -60,7 +60,7 @@ class ProductView(CustomModelView):
     }
 
     form_extra_fields = {
-        'price': DecimalField('Amount', validators=[NumberRange(min=0)]),
+        'price': DecimalField('Price', validators=[NumberRange(min=0)]),
         'amount': IntegerField('Amount', validators=[NumberRange(min=0)]),
         'image': ImageUploadField('Upload image',
                                   base_path=IMAGE_UPLOADS,
@@ -72,7 +72,10 @@ class ProductView(CustomModelView):
 
     def _list_thumbnail(self, context, model, name):
         # Generate thumbnail image for model object
-        url = url_for('static', filename=os.path.join('img/uploads/', model.image))
+        if model.image:
+            url = url_for('static', filename=os.path.join('img/uploads/', model.image))
+        else:
+            url = url_for('static', filename='img/default_image.jpg')
         return Markup(f'<img src={url} width="100">')
 
     # Customize the data that is exported for the image and category columns

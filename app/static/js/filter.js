@@ -1,3 +1,7 @@
+// set the first option in the select element as the default selection on page load
+document.getElementById("categorySelect").selectedIndex = 0;
+document.getElementById("availabilitySelect").selectedIndex = 0;
+
 let products;
 
 // get selected category
@@ -42,7 +46,11 @@ function createProductElement(product) {
     productElement.appendChild(card);
 
     let image = document.createElement('img');
-    image.src = `${'static/img/uploads/' + product.image}`;
+    if (product.image) {
+        image.src = `${'static/img/uploads/' + product.image}`;
+    } else {
+        image.src = 'static/img/default_image.jpg';
+    }
     image.classList.add('card-img-top');
     image.alt = `${product.name}`;
     card.appendChild(image);
