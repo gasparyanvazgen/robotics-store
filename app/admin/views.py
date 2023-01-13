@@ -49,7 +49,7 @@ class ProductView(CustomModelView):
     column_details_list = ['name', 'price', 'amount', 'description', 'image', 'category']
 
     # hide the description column in the list view
-    column_exclude_list = ['description']
+    column_exclude_list = ['description', 'image']
 
     # customize columns for export
     column_export_list = column_details_list

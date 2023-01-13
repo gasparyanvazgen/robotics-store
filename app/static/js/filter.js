@@ -6,18 +6,28 @@ let products;
 
 // get selected category
 $(document).ready(function() {
+    let selectedCategoryId;
+    let selectedAvailability;
+
     $('#categorySelect').on('change', function() {
-        let selectedCategoryId = $(this).val();
-        filterProductsWithCategory(selectedCategoryId);
+        selectedCategoryId = $(this).val();
+        filterProductsWithCategory(selectedCategoryId, selectedAvailability);
+    });
+    $('#availabilitySelect').on('change', function() {
+        selectedAvailability = $(this).val();
+        filterProductsWithCategory(selectedCategoryId, selectedAvailability);
     });
 });
 
 // get filtered products
-function filterProductsWithCategory(category_id) {
+function filterProductsWithCategory(categoryId, availability) {
     $.ajax({
         type: "GET",
         url: "/filter-products",
-        data: {category_id: category_id},
+        data: {
+            category_id: categoryId,
+            availability: availability
+        },
         success: function (data) {
             products = data;
             render();

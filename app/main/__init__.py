@@ -39,9 +39,10 @@ def login():
 @main.route('/filter-products')
 def filter_products():
     category_id = request.args.get('category_id')
+    availability = request.args.get('availability')
 
     # function to filter your data based on the category
-    filtered_data = filter_products_with_category(category_id)
+    filtered_data = filter_products_with_category(category_id, availability)
     return jsonify(filtered_data)
 
 
