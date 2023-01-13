@@ -8,25 +8,31 @@ let products;
 $(document).ready(function() {
     let selectedCategoryId;
     let selectedAvailability;
+    let searchValue;
 
     $('#categorySelect').on('change', function() {
         selectedCategoryId = $(this).val();
-        filterProductsWithCategory(selectedCategoryId, selectedAvailability);
+        filterProducts(selectedCategoryId, selectedAvailability, searchValue);
     });
     $('#availabilitySelect').on('change', function() {
         selectedAvailability = $(this).val();
-        filterProductsWithCategory(selectedCategoryId, selectedAvailability);
+        filterProducts(selectedCategoryId, selectedAvailability, searchValue);
+    });
+    $("#searchInput").on("keyup", function() {
+        searchValue = $(this).val();
+        filterProducts(selectedCategoryId, selectedAvailability, searchValue);
     });
 });
 
 // get filtered products
-function filterProductsWithCategory(categoryId, availability) {
+function filterProducts(categoryId, availability, search) {
     $.ajax({
         type: "GET",
         url: "/filter-products",
         data: {
             category_id: categoryId,
-            availability: availability
+            availability: availability,
+            search: search
         },
         success: function (data) {
             products = data;

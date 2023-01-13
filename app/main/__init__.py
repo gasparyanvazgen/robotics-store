@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, request, jsonify
 from flask_login import LoginManager, login_user, current_user
 
-from .filter import filter_products_with_category
+from .filter import filter_or_search_products
 from ..main.forms import LoginForm
 from ..models import User, Product, Category
 
@@ -40,9 +40,10 @@ def login():
 def filter_products():
     category_id = request.args.get('category_id')
     availability = request.args.get('availability')
+    search = request.args.get('search')
 
-    # function to filter your data based on the category
-    filtered_data = filter_products_with_category(category_id, availability)
+    # filter your data based on the category, availability and search
+    filtered_data = filter_or_search_products(category_id, availability, search)
     return jsonify(filtered_data)
 
 
