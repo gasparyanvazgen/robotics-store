@@ -23,6 +23,9 @@ class CustomBaseView(BaseView):
     def is_accessible(self):
         return current_user.is_authenticated
 
+    def inaccessible_callback(self, name, **kwargs):
+        return redirect(url_for('main.login'))
+
 
 class CustomModelView(ModelView):
     # Enable data export for the view
@@ -31,10 +34,16 @@ class CustomModelView(ModelView):
     def is_accessible(self):
         return current_user.is_authenticated
 
+    def inaccessible_callback(self, name, **kwargs):
+        return redirect(url_for('main.login'))
+
 
 class IndexView(AdminIndexView):
     def is_accessible(self):
         return current_user.is_authenticated
+
+    def inaccessible_callback(self, name, **kwargs):
+        return redirect(url_for('main.login'))
 
 
 class ProductView(CustomModelView):
