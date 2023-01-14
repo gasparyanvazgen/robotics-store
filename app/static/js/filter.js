@@ -1,6 +1,7 @@
-// set the first option in the select element as the default selection on page load
+// set as default value on page loa
 document.getElementById("categorySelect").selectedIndex = 0;
 document.getElementById("availabilitySelect").selectedIndex = 0;
+document.getElementById("searchInput").value = "";
 
 let products;
 
