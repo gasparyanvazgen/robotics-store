@@ -1,63 +1,120 @@
 {% extends "base.html" %}
-{% block title %}Home page{% endblock %}
+{% block title %}RoboShop{% endblock %}
 
 {% block content %}
-<section style="background-color: #eee;">
-  <div class="container py-5">
-    <div class="form-group">
-      <label for="categorySelect">Ցուցադրել ապրանքը ըստ տեսակի՝</label>
-      <select class="form-control" id="categorySelect">
-        <option value="0">Բոլորը</option>
-        {% for category in categories %}
-        <option value="{{ category.id }}">{{ category.name }}</option>
-        {% endfor %}
-      </select>
-    </div>
-    <br>
-    <div class="form-group">
-      <label for="availabilitySelect">Ցուցադրել ապրանքներից՝</label>
-      <select class="form-control" id="availabilitySelect">
-        <option value="0">Բոլորը</option>
-        <option value="1">Միայն առկաները</option>
-      </select>
-    </div>
-    <br><br>
+<div class="back"></div>
 
-    <div class="row">
-      {% for product in products %}
-      <div class="col-md-12 col-lg-4 mb-4 mb-lg-0">
-        <div class="card">
-          {% if product.image %}
-          <img src="{{ url_for('static', filename='img/uploads/' + product.image) }}" class="card-img-top" alt="{{ product.name }}" />
-          {% else %}
-          <img src="{{ url_for('static', filename='img/default_image.jpg') }}" class="card-img-top" alt="{{ product.name }}" />
-          {% endif %}
+<div class="content" data-aos="fade-right">
+    <h1>Welcome to Online Market</h1>
+    <p>Ստեղ կարա լինի կայքի վերաբերյալ փոքր տեքստ</p>
 
-          <div class="card-body">
-            <div class="d-flex justify-content-between">
-              <p class="small">{{ product.category.name }}</p>
+    <button class="button-btn">Գնել</button>
+
+</div>
+
+<div class="intro">
+    <a href="#products" title="" class="scroll-btn">
+        <img src="{{ url_for('static', filename='img/scroll-btn.jpg') }}" alt="">
+        <h2>Scroll down for shoping</h2>
+    </a>
+</div>
+
+<section class="products" id="products">
+    <h1 class="heading"> Ռոբոտաշինական <span>ապրանքներ</span></h1>
+<!--filtering products-->
+    <div class="container">
+        <div class="select-box">
+
+            <div class="search">
+                <table class="search-box">
+                    <tr>
+                        <td>
+                            <input type="text" id="searchInput" placeholder="Search..." />
+                        </td>
+                        <td>
+                            <a href="#"><i class="fas fa-search"></i></a>
+                        </td>
+                    </tr>
+                </table>
             </div>
 
-            <div class="d-flex justify-content-between mb-3">
-              <h5 class="mb-0">{{ product.name }}</h5>
-              <h5 class="text-dark mb-0">{{ product.price }} <span>&#x058f;</span></h5>
+            <div class="options-container" id="categorySelect">
+                <div class="option">
+                    <input type="radio" class="radio" id="sensor" name="category" value="0">
+                    <label for="sensor">Բոլորը</label>
+                </div>
+                {% for category in categories %}
+                <div class="option">
+                    <input type="radio" class="radio" id="sensor" name="category" value="{{ category.id }}">
+                    <label for="sensor">{{ category.name }}</label>
+                </div>
+                {% endfor %}
             </div>
 
-            <div class="d-flex justify-content-between mb-2">
-              <p class="text-muted mb-0">
-                {% if product.amount %}Առկա է{% else %}Առկա չէ{% endif %}
-              </p>
+            <div class="checkbox-container">
+                <input type="checkbox" id="availabilitySelect">
+                <label for="availabilitySelect">Միայն առկաները</label>
             </div>
-          </div>
+
+            <div class="selected">
+                    Select Product Cards
+            </div>
         </div>
-      </div>
-      {% endfor %}
     </div>
-  </div>
+
+    <section class="section section-one active">
+        <div class="box-container">
+            {% for product in products %}
+            <div class="box">
+                {% if product.amount %}
+                <span class="available"></span>
+                {% else %}
+                <span class="not-available"></span>
+                {% endif %}
+                <div class="image">
+                    {% if product.image %}
+                    <img src="{{ url_for('static', filename='img/uploads/' + product.image) }}" class="card-img-top" alt="{{ product.name }}" />
+                    {% else %}
+                    <img src="{{ url_for('static', filename='img/default_image.jpg') }}" class="card-img-top" alt="{{ product.name }}" />
+                    {% endif %}
+                </div>
+                <div class="text">
+                    <h5>{{ product.category.name }}</h5>
+                    <h3>{{ product.name }}</h3>
+                    <div class="price">{{ product.price }} &#x058f;</div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+<!--pagination bar-->
+    <div class="products-card">
+        <ul class="nav">
+            <li class="active">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
+   
+        <button class="previous disable" id="prevBtn" onclick="tabbedContent.goPrev()">Previous</button>
+        <button class="next" id="nextBtn" onclick="tabbedContent.goNext()"> Next </button>
+        </div>
+    </div>
 </section>
 {% endblock %}
 
 {% block javascript %}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
 <script src="{{ url_for('static', filename='js/filter.js') }}"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script src="index.js"></script>
+<script>
+    AOS.init({
+        offset: 200,
+        duration: 1200,
+    });
+ </script>
 {% endblock %}

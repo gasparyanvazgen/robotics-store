@@ -1,22 +1,21 @@
-// set as default value on page loa
-document.getElementById("categorySelect").selectedIndex = 0;
-document.getElementById("availabilitySelect").selectedIndex = 0;
-document.getElementById("searchInput").value = "";
-
 let products;
 
 // get selected category
 $(document).ready(function() {
+    // set as default value on page load
+    $('#searchInput').val('');
+    $('#availabilitySelect').val('0').prop('checked', false);
+
     let selectedCategoryId;
     let selectedAvailability;
     let searchValue;
 
-    $('#categorySelect').on('change', function() {
-        selectedCategoryId = $(this).val();
+    $('#categorySelect .option').on('click', function() {
+        selectedCategoryId = $(this).find('input').val();
         filterProducts(selectedCategoryId, selectedAvailability, searchValue);
     });
     $('#availabilitySelect').on('change', function() {
-        selectedAvailability = $(this).val();
+        selectedAvailability = $(this).prop('checked') ? '1' : '0';
         filterProducts(selectedCategoryId, selectedAvailability, searchValue);
     });
     $("#searchInput").on("keyup", function() {
@@ -44,7 +43,7 @@ function filterProducts(categoryId, availability, search) {
 
 // update the contents of the webpage with the filtered data
 function render() {
-    let container = document.querySelector('.row');
+    let container = document.querySelector('.box-container');
     container.innerHTML = '';
 
     products.forEach(function(product) {
@@ -55,62 +54,51 @@ function render() {
 
 // create product card
 function createProductElement(product) {
-    let productElement = document.createElement('div');
-    productElement.classList.add('col-md-12', 'col-lg-4', 'mb-4', 'mb-lg-0');
+    // Create a container element for the product
+    const productElement = document.createElement("div");
+    productElement.classList.add("box");
 
-    let card = document.createElement('div');
-    card.classList.add('card');
-    productElement.appendChild(card);
+    // Create a span element for the availability status
+    const availability = document.createElement("span");
+    if (product.amount) {
+        availability.classList.add("available");
+    } else {
+        availability.classList.add("not-available");
+    }
+    productElement.appendChild(availability);
 
-    let image = document.createElement('img');
+    // Create a div element for the product image
+    const imageContainer = document.createElement("div");
+    imageContainer.classList.add("image");
+    const image = document.createElement("img");
+    image.src = 'static/img/default_image.jpg';
     if (product.image) {
         image.src = `${'static/img/uploads/' + product.image}`;
-    } else {
-        image.src = 'static/img/default_image.jpg';
     }
-    image.classList.add('card-img-top');
-    image.alt = `${product.name}`;
-    card.appendChild(image);
+    imageContainer.appendChild(image);
+    productElement.appendChild(imageContainer);
 
-    let cardBody = document.createElement('div');
-    cardBody.classList.add('card-body');
-    card.appendChild(cardBody);
+    // Create a div element for the product details
+    const textContainer = document.createElement("div");
+    textContainer.classList.add("text");
 
-    let div1 = document.createElement('div');
-    div1.classList.add('d-flex', 'justify-content-between');
-    cardBody.appendChild(div1);
+    // Create a h5 element for the category name
+    const category = document.createElement("h5");
+    category.innerText = product.category.name;
+    textContainer.appendChild(category);
 
-    let category = document.createElement('p');
-    category.classList.add('small');
-    category.innerText = `${product.category.name}`;
-    div1.appendChild(category);
+    // Create a h3 element for the product name
+    const name = document.createElement("h3");
+    name.innerText = product.name;
+    textContainer.appendChild(name);
 
-    let div2 = document.createElement('div');
-    div2.classList.add('d-flex', 'justify-content-between', 'mb-3');
-    cardBody.appendChild(div2);
+    // Create a div element for the product price
+    const price = document.createElement("div");
+    price.classList.add("price");
+    price.innerHTML = `${product.price} &#x058f;`;
+    textContainer.appendChild(price);
 
-    let title = document.createElement('h5');
-    title.classList.add('mb-0');
-    title.innerText = `${product.name}`;
-    div2.appendChild(title);
-
-    let price = document.createElement('h5');
-    price.classList.add('text-dark', 'mb-0');
-    price.innerHTML = `${product.price} <span>&#x058f;</span>`;
-    div2.appendChild(price);
-
-    let div3 = document.createElement('div');
-    div3.classList.add('d-flex', 'justify-content-between', 'mb-2');
-    cardBody.appendChild(div3);
-
-    let availability = document.createElement('p');
-    availability.classList.add('text-muted', 'mb-0');
-    if (product.amount) {
-        availability.innerText = 'Առկա է';
-    } else {
-        availability.innerText = 'Առկա չէ';
-    }
-    div3.appendChild(availability);
+    productElement.appendChild(textContainer);
 
     return productElement;
 }
