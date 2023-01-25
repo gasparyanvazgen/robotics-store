@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="95cc7d1f-66b2-4fd0-bc90-c8502b346a02" name="Default Changelist" comment="add frontend to backend">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/admin/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/admin/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main/filter.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main/forms.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/css/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/img/default_image.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/img/uploads/23c9890ef7e6a9a2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/img/uploads/43b681c9da78e0b5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/img/uploads/4f61a6ae2da3a8fa.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/img/uploads/985f59f7c3b46830.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/img/uploads/9be2af07a3019980.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/img/uploads/a41dcebf14dea2d9.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/img/uploads/bffafaea91591ee1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/img/uploads/ef4495762508d371.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/js/filter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/base.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run.py" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="2KmJJ7fusdbjyTRIqlMbtMvE3By" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$USER_HOME$" />
+    <property name="settings.editor.selected.configurable" value="MTConfigurable" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="95cc7d1f-66b2-4fd0-bc90-c8502b346a02" name="Default Changelist" comment="" />
+      <created>1674573785912</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1674573785912</updated>
+    </task>
+    <task id="LOCAL-00001" summary="add frontend to backend">
+      <created>1674590362115</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1674590362215</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add frontend to backend" />
+    <option name="LAST_COMMIT_MESSAGE" value="add frontend to backend" />
+  </component>
+</project>
