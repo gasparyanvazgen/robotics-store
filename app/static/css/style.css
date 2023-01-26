@@ -179,8 +179,8 @@ html{
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    margin-top: 30px;
-    margin-bottom: 10px;
+    margin-top: 70px;
+    margin-bottom: -120px;
 }
 
 .select-box{
@@ -214,7 +214,7 @@ html{
 
 .selected::after{
     content: "";
-    background: url("Image/arrow-down.svg");
+    background: url("../img/arrow-down.svg");
     background-size: contain;
     background-repeat: no-repeat;
     position: absolute;
@@ -283,7 +283,7 @@ html{
 .checkbox-container label{
     cursor: pointer;
     display: flex;
-    margin-left: 20px;
+    margin-left: 13px;
     font-size: 15px;
 }
 
@@ -318,18 +318,59 @@ html{
 
 /* Product Container */
 
-.products .box-container{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
-    gap: 20px;
-    padding: 40px;
-    margin-top: -150px;
-    width: 100%;
+.row .column {
+    float: left;
+    width: 30%;
+    padding: 0 20px;
+    margin-top: 30px;
+    margin: 20px;
+}
+
+.row{
+    margin: 0 -5px;
+}
+
+.row::after{
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.column .card{
+    box-shadow: 0 3px 20px rgba(0,0,0,.35);
+    padding: 16px;
+    text-align: center;
+    background-color: #fff;
+}
+
+.column .card img{
+    padding: 3rem 5rem;
+    height: 30rem;
+    display: block;
+    transition: 0.5s;
+}
+
+.column img:hover{
+    transform: scale(1.1);
+}
+
+.column .card p{
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.column .card h1{
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.price{
+    color: #ff7200;
 }
 
 /* Out of stock */
 
-.products .box-container .box span{
+.column .card span{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -340,7 +381,7 @@ html{
     overflow: hidden;
 }
 
-.products .box-container .box span::before{
+.column .card .not-available::before{
     content: 'Առկա չէ';
     font-weight: 600;
     font-size: 13px;
@@ -348,17 +389,17 @@ html{
     position: absolute;
     width: 130px;
     height: 30px;
-    background: rgb(180, 180, 180);;
+    background: rgb(180, 180, 180);
     color: #392cac;
-    transform: rotate(0) translateY(-10px) translateX(30px);
+    transform: rotate(0) translateY(-10px) translateX(13px);
     border-radius: 0 0 100px 0;
     display: flex;
     align-items: center;
     justify-content: center;
-
+    
 }
 
-.products .box-container .box span::after{
+.column .card span::after{
     content: '';
     position: absolute;
     width: 10px;
@@ -413,14 +454,21 @@ html{
 @media (max-width:1024px){
     .search{
         width: 180px;
-        transform:  translate(-360%, 295%);
+        transform:  translate(-310%, 295%);
     }
     .checkbox-container{
         width: 200px;
-        transform:  translate(180%, 150%);
+        transform:  translate(160%, 150%);
     }
     .select-box{
         width: 200px;
+    }
+    .row .column {
+        width: 45%;
+    }
+    .pagination{
+        width: 510px;
+        transform: translate(45%, 40%);
     }
 }
 
@@ -432,6 +480,14 @@ html{
     .checkbox-container{
         width: 200px;
         transform:  translate(120%, 150%);
+    }
+    .row .column {
+        width: 50%;
+        margin-left: 220px;
+    }
+    .pagination{
+        width: 500px;
+        transform: translate(35%, 40%);
     }
 }
 
@@ -445,6 +501,14 @@ html{
         width: 200px;
         transform:  translate(120%, 150%);
     }
+    .row .column {
+        width: 50%;
+        margin-left: 200px;
+    }
+    .pagination{
+        width: 500px;
+        transform: translate(33%, 40%);
+    }
 }
 @media (max-width:840px){
     .container{
@@ -453,14 +517,83 @@ html{
     .search{
         margin-top: 100px;
         width: 180px;
-        transform:  translate(-110%, 0%);
+        transform:  translate(-110%, 45%);
     }
     .checkbox-container{
         width: 180px;
-        transform:  translate(-5%, 0%);
+        transform:  translate(-5%, 25%);
     }
-    .products-card {
-        max-width: 800px;
+    .row .column {
+        width: 50%;
+        margin-left: 170px;
+    }
+    .pagination{
+        width: 500px;
+        transform: translate(20%, 40%);
+    }
+}
+@media (max-width:700px){
+    .pagination{
+        width: 500px;
+        transform: translate(15%, 40%);
+    }
+}
+
+@media (max-width:650px){
+    .search{
+        margin-top: 100px;
+        width: 180px;
+        transform:  translate(-110%, 45%);
+    }
+    .checkbox-container{
+        width: 180px;
+        transform:  translate(-5%, 25%);
+    }
+    .row .column {
+        width: 65%;
+        margin-left: 100px;
+    }
+    .pagination{
+        width: 500px;
+        transform: translate(7%, 40%);
+    }
+}
+
+@media (max-width:570px){
+    .row .column {
+        width: 70%;
+        margin-left: 80px;
+    }
+    .pagination{
+        width: 370px;
+        transform: translate(18%, 40%);
+    }
+    .pagination li.pageNumber{
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+    }
+    .pagination li:first-child{
+        margin-right: 15px;
+        font-weight: 700;
+        font-size: 10px;
+    }
+    
+    .pagination li:last-child{
+        margin-left: 15px;
+        font-weight: 700;
+        font-size: 10px;
+    }
+}
+
+@media (max-width:490px){
+    .row .column {
+        width: 75%;
+        margin-left: 60px;
+    }
+    .pagination{
+        width: 370px;
+        transform: translate(3%, 40%);
     }
 }
 
@@ -496,15 +629,14 @@ html{
         width: 180px;
         transform:  translate(10%, 0%);
     }
-    .products .box-container{
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
-        gap: 20px;
-        padding: 20px;
-        margin-top: 50px;
+    .row .column {
+        width: 80%;
+        margin-left: 25px;
+        margin-top: 200px;
     }
-    .products-card {
-        max-width: 100px;
+    .pagination{
+        width: 338px;
+        transform: translate(-2%, 40%);
     }
 }
 
@@ -541,15 +673,9 @@ html{
         width: 180px;
         transform:  translate(0%, 0%);
     }
-    .products .box-container{
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
-        gap: 20px;
-        padding: 20px;
-        margin-top: 50px;
-    }
-    .products-card {
-        max-width: 100px;
+    .row .column {
+        width: 90%;
+        margin-left: 20px;
     }
 }
 
@@ -557,11 +683,19 @@ html{
     .search{
         transform:  translate(-122%, 10%);
     }
+    .row .column {
+        width: 100%;
+        margin-left: 1px;
+    }
+    .pagination{
+        width: 338px;
+        transform: translate(-5%, 40%);
+    }
 }
 
 /* In stock */
 
-.products .box-container .box h2{
+.column .card h2{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -572,7 +706,7 @@ html{
     overflow: hidden;
 }
 
-.products .box-container .box .available::before{
+.column .card .available::before{
     content: 'Առկա է';
     font-weight: 500;
     font-size: 13px;
@@ -582,7 +716,7 @@ html{
     height: 30px;
     background: #ff7200;
     color: #fff;
-    transform: rotate(0) translateY(-10px) translateX(30px);
+    transform: rotate(0) translateY(-10px) translateX(13px);
     border-radius: 0 0 100px 0;
     display: flex;
     align-items: center;
@@ -590,7 +724,7 @@ html{
     
 }
 
-.products .box-container .box h2::after{
+.column .card h2::after{
     content: '';
     position: absolute;
     width: 10px;
@@ -601,103 +735,58 @@ html{
     z-index: -1;
 }
 
-/* Product Cards */
+/* Back & Next */
 
-.products .box-container .box{
-    text-align: center;
-    border: var(--border);
-    border: 1px solid #000;
-    margin: 30px;
-    border-radius: 8px;
-    box-shadow: 0 3px 20px rgba(0,0,0,.35);
+ul{
+    width: 510px;
+    position: relative;
     background: #fff;
-}
-
-.products .box-container .box .image{
-    padding: 1rem 0;
-    display: block;
-    transition: 0.5s;
-}
-.products .box-container .box .image:hover{
-    transform: scale(1.1);
-}
-.products .box-container .box .image img{
-    height: 20rem;
-}
-
-.products .box-container .box .text h3{
-    color: #000;
-    font-size: 2.1rem;
-    font-weight: 600;
-}
-
-.products .box-container .box .text h5{
-    color: rgb(133, 133, 133);
-    font-size: 1.4rem;
-}
-
-.products .box-container .box .text .price{
-    color: #ff7200;
-    font-size: 2rem;
-    margin-top: 20px;
-    margin-bottom: 10px;
-}
-
-/* Previous and Next */
-
-.products-card {
-    max-width: 1000px;
-    margin: 0 auto;
-    text-align: center;
-    margin-left: 110px;
-}
-
-.section {
-    display: none;
-}
-
-.section.active {
-    display: block;
-}
-
-ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
     display: flex;
+    padding: 10px 20px;
+    border-radius: 50px;
+    box-shadow: 0 5px 15px #000;
+    align-items: center;
     justify-content: center;
+    transform: translate(70%, 40%);
 }
 
-ul li {
-    background: #ff7200;
-    padding: 10px 15px;
-    margin-left: 6px;
+ul li{
+    list-style: none;
+    line-height: 50px;
+    margin: 0 5px;
+}
+
+ul li.pageNumber{
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+}
+
+ul li a{
+    display: block;
+    text-decoration: none;
+    color: #000;
+    font-weight: 600;
     border-radius: 50%;
-    cursor: pointer;
-    opacity: .5;
 }
 
-ul li.active {
-    opacity: 1 !important;
-}
-
-.next,
-.previous {
-    padding: 15px 10px;
-    border-radius: 6px;
-    background: #1201af;
+ul li.pageNumber:hover a,
+ul li.pageNumber.active a{
+    background: #ff7200;
     color: #fff;
-    border: 0;
-    outline: none;
-    cursor: pointer;
-    width: 100px;
-    margin: 10px;
 }
 
-.next.disable,
-.previous.disable {
-    cursor: none;
-    opacity: .5;
+ul li:first-child{
+    margin-right: 30px;
+    font-weight: 700;
+    font-size: 15px;
+}
+
+ul li:last-child{
+    margin-left: 30px;
+    font-weight: 700;
+    font-size: 15px;
 }
 
 /* footer */

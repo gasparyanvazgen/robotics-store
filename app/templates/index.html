@@ -21,7 +21,7 @@
 
 <section class="products" id="products">
     <h1 class="heading"> Ռոբոտաշինական <span>ապրանքներ</span></h1>
-<!--filtering products-->
+
     <div class="container">
         <div class="select-box">
 
@@ -40,13 +40,13 @@
 
             <div class="options-container" id="categorySelect">
                 <div class="option">
-                    <input type="radio" class="radio" id="sensor" name="category" value="0">
-                    <label for="sensor">Բոլորը</label>
+                    <input type="radio" class="radio" id="category" name="category" value="0">
+                    <label for="category">Բոլորը</label>
                 </div>
                 {% for category in categories %}
                 <div class="option">
-                    <input type="radio" class="radio" id="sensor" name="category" value="{{ category.id }}">
-                    <label for="sensor">{{ category.name }}</label>
+                    <input type="radio" class="radio" id="category" name="category" value="{{ category.id }}">
+                    <label for="category">{{ category.name }}</label>
                 </div>
                 {% endfor %}
             </div>
@@ -62,59 +62,69 @@
         </div>
     </div>
 
-    <section class="section section-one active">
-        <div class="box-container">
-            {% for product in products %}
-            <div class="box">
+    <!-- Product Cards -->
+    <div class="row">
+        {% for product in products %}
+        <div class="column">
+            <div class="card">
                 {% if product.amount %}
                 <span class="available"></span>
                 {% else %}
                 <span class="not-available"></span>
                 {% endif %}
-                <div class="image">
-                    {% if product.image %}
-                    <img src="{{ url_for('static', filename='img/uploads/' + product.image) }}" class="card-img-top" alt="{{ product.name }}" />
-                    {% else %}
-                    <img src="{{ url_for('static', filename='img/default_image.jpg') }}" class="card-img-top" alt="{{ product.name }}" />
-                    {% endif %}
-                </div>
-                <div class="text">
-                    <h5>{{ product.category.name }}</h5>
-                    <h3>{{ product.name }}</h3>
-                    <div class="price">{{ product.price }} &#x058f;</div>
-                </div>
+                {% if product.image %}
+                <img src="{{ url_for('static', filename='img/uploads/' + product.image) }}" class="card-img-top" alt="{{ product.name }}" style="width:100%" />
+                {% else %}
+                <img src="{{ url_for('static', filename='img/default_image.jpg') }}" class="card-img-top" alt="{{ product.name }}" style="width:100%" />
+                {% endif %}
+                <p>{{ product.category.name }}</p>
+                <h1>{{ product.name }}</h1>
+                <p class="price">{{ product.price }} &#x058f;</p>
             </div>
-            {% endfor %}
         </div>
-    </section>
-
-<!--pagination bar-->
-    <div class="products-card">
-        <ul class="nav">
-            <li class="active">1</li>
-            <li>2</li>
-            <li>3</li>
-            <li>4</li>
-            <li>5</li>
-        </ul>
-   
-        <button class="previous disable" id="prevBtn" onclick="tabbedContent.goPrev()">Previous</button>
-        <button class="next" id="nextBtn" onclick="tabbedContent.goNext()"> Next </button>
-        </div>
+        {% endfor %}
     </div>
+
+    <!-- Pagination Bar -->
+    <ul class="pagination">
+        <li><a href="#" class="prev">Prev</a></li>
+        <li class="pageNumber active"><a href="#">1</a></li>
+        <li class="pageNumber"><a href="#">2</a></li>
+        <li class="pageNumber"><a href="#">3</a></li>
+        <li class="pageNumber"><a href="#">4</a></li>
+        <li class="pageNumber"><a href="#">5</a></li>
+        <li><a href="#" class="next">Next</a></li>
+    </ul>
 </section>
 {% endblock %}
 
 {% block javascript %}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
 <script src="{{ url_for('static', filename='js/index.js') }}"></script>
 <script src="{{ url_for('static', filename='js/filter.js') }}"></script>
-<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-<script src="index.js"></script>
-<script>
+
+<script type="text/javascript">
     AOS.init({
         offset: 200,
         duration: 1200,
     });
  </script>
+<script type="text/javascript">
+        $(document).ready(function(){
+            $('.next').click(function(){
+              $('.pagination').find('.pageNumber.active').next().
+                addClass('active');
+                $('.pagination').find('.pageNumber.active').prev().
+                removeClass('active');
+            })
+            $('.prev').click(function(){
+              $('.pagination').find('.pageNumber.active').prev().
+                addClass('active');
+                $('.pagination').find('.pageNumber.active').next().
+                removeClass('active');
+            })
+        })
+    </script>
 {% endblock %}

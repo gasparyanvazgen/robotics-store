@@ -18,7 +18,7 @@ $(document).ready(function() {
         selectedAvailability = $(this).prop('checked') ? '1' : '0';
         filterProducts(selectedCategoryId, selectedAvailability, searchValue);
     });
-    $("#searchInput").on("keyup", function() {
+    $('#searchInput').on('keyup', function() {
         searchValue = $(this).val();
         filterProducts(selectedCategoryId, selectedAvailability, searchValue);
     });
@@ -27,8 +27,8 @@ $(document).ready(function() {
 // get filtered products
 function filterProducts(categoryId, availability, search) {
     $.ajax({
-        type: "GET",
-        url: "/filter-products",
+        type: 'GET',
+        url: '/filter-products',
         data: {
             category_id: categoryId,
             availability: availability,
@@ -43,7 +43,7 @@ function filterProducts(categoryId, availability, search) {
 
 // update the contents of the webpage with the filtered data
 function render() {
-    let container = document.querySelector('.box-container');
+    let container = document.querySelector('.row');
     container.innerHTML = '';
 
     products.forEach(function(product) {
@@ -55,50 +55,50 @@ function render() {
 // create product card
 function createProductElement(product) {
     // Create a container element for the product
-    const productElement = document.createElement("div");
-    productElement.classList.add("box");
+    const productElement = document.createElement('div');
+    productElement.classList.add('column');
+
+    // Create the card element
+    const card = document.createElement('div');
+    card.classList.add('card');
+    productElement.appendChild(card);
 
     // Create a span element for the availability status
-    const availability = document.createElement("span");
+    const availability = document.createElement('span');
     if (product.amount) {
-        availability.classList.add("available");
+        availability.classList.add('available');
     } else {
-        availability.classList.add("not-available");
+        availability.classList.add('not-available');
     }
-    productElement.appendChild(availability);
+    card.appendChild(availability);
 
-    // Create a div element for the product image
-    const imageContainer = document.createElement("div");
-    imageContainer.classList.add("image");
-    const image = document.createElement("img");
-    image.src = 'static/img/default_image.jpg';
+    // Create the image element
+    const image = document.createElement('img');
+    image.classList.add('card-img-top');
+    image.style.width = '100%';
+    image.alt = product.name;
     if (product.image) {
-        image.src = `${'static/img/uploads/' + product.image}`;
+        image.src = `static/img/uploads/${product.image}`;
+    } else {
+        image.src = 'static/img/default_image.jpg';
     }
-    imageContainer.appendChild(image);
-    productElement.appendChild(imageContainer);
+    card.appendChild(image);
 
-    // Create a div element for the product details
-    const textContainer = document.createElement("div");
-    textContainer.classList.add("text");
-
-    // Create a h5 element for the category name
-    const category = document.createElement("h5");
+    // Create the category element
+    const category = document.createElement('p');
     category.innerText = product.category.name;
-    textContainer.appendChild(category);
+    card.appendChild(category);
 
-    // Create a h3 element for the product name
-    const name = document.createElement("h3");
+    // Create the name element
+    const name = document.createElement('h1');
     name.innerText = product.name;
-    textContainer.appendChild(name);
+    card.appendChild(name);
 
-    // Create a div element for the product price
-    const price = document.createElement("div");
+    // Create the price element
+    const price = document.createElement('p');
     price.classList.add("price");
     price.innerHTML = `${product.price} &#x058f;`;
-    textContainer.appendChild(price);
-
-    productElement.appendChild(textContainer);
+    card.appendChild(price);
 
     return productElement;
 }
