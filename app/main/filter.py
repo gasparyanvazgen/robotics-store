@@ -1,15 +1,16 @@
 from sqlalchemy import or_, case, text
 
 from app.models import Product
+from config import PRODUCTS_PER_PAGE
 
 
-def filter_or_search_products(category_id, availability, search):
+def filter_or_search_products(page, category_id, availability, search):
     query = Product.query
 
-    if category_id and category_id != '0':
+    if category_id and category_id != 0:
         # Filter the products by the selected category
         query = query.filter(Product.category_id == category_id)
-    if availability and availability != '0':
+    if availability == 'on':
         # Filter the products by the selected availability
         query = query.filter(Product.amount > 0)
     if search:
@@ -28,6 +29,7 @@ def filter_or_search_products(category_id, availability, search):
             text('name'),
             text('description')
         )
-    filtered_data = query.all()
+    pagination = query.paginate(page=page, per_page=PRODUCTS_PER_PAGE)
+    filtered_data = pagination.items
 
-    return [product.to_dict() for product in filtered_data]
+    return [product.to_dict() for product in filtered_data], pagination

@@ -12,10 +12,10 @@ button_btn.onclick = function() {
 const links = document.querySelectorAll('.scroll-btn');
 
 for (const link of links) {
-    link.addEventListener('click', clickHandlear);
+    link.addEventListener('click', clickHandler);
 }
 
-function clickHandlear(e) {
+function clickHandler(e) {
     e.preventDefault();
     const href = this.getAttribute('href');
     const offsetTop = document.querySelector(href).
@@ -40,7 +40,7 @@ selected.addEventListener("click", () => {
 
 optionsList.forEach(o => {
     o.addEventListener("click", () => {
-      selected.innerHTML = o.querySelector("label").innerHTML;
-      optionsContainer.classList.remove("active");
+        selected.innerHTML = o.querySelector("label").innerHTML;
+        optionsContainer.classList.remove("active");
     });
 });

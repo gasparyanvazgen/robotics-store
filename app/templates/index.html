@@ -22,45 +22,56 @@
 <section class="products" id="products">
     <h1 class="heading"> Ռոբոտաշինական <span>ապրանքներ</span></h1>
 
-    <div class="container">
-        <div class="select-box">
-
-            <div class="search">
-                <table class="search-box">
-                    <tr>
-                        <td>
-                            <input type="text" id="searchInput" placeholder="Search..." />
-                        </td>
-                        <td>
-                            <a href="#"><i class="fas fa-search"></i></a>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-
-            <div class="options-container" id="categorySelect">
-                <div class="option">
-                    <input type="radio" class="radio" id="category" name="category" value="0">
-                    <label for="category">Բոլորը</label>
+    <form action="{{url_for('main.index')}}" method="get" id="filter-form">
+        <div class="container">
+            <div class="select-box">
+                <div class="search">
+                    <table class="search-box">
+                        <tr>
+                            <td>
+                                <input type="text" id="searchInput" name="search" placeholder="Search..." {% if search %}value="{{ search }}"{% endif %} />
+                            </td>
+                            <td>
+                                <a href="" id="search"><i class="fas fa-search"></i></a>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
-                {% for category in categories %}
-                <div class="option">
-                    <input type="radio" class="radio" id="category" name="category" value="{{ category.id }}">
-                    <label for="category">{{ category.name }}</label>
+                <div class="options-container" id="categorySelect">
+                    <div class="option">
+                        <input type="radio" class="radio" id="All" name="category_id" value="0" {% if category_id == 0 %}checked{% endif %} />
+                        <label for="All">Բոլորը</label>
+                    </div>
+                    {% for category in categories %}
+                    <div class="option">
+                        <input type="radio" class="radio" id="{{ category.name }}" name="category_id" value="{{ category.id }}" {% if category_id == category.id %}checked{% endif %} />
+                        <label for="{{ category.name }}">{{ category.name }}</label>
+                    </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
-            </div>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="availabilitySelect" name="availability" {% if availability == 'on' %}checked{% endif %} />
+                    <label for="availabilitySelect">Միայն առկաները</label>
+                </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" id="availabilitySelect">
-                <label for="availabilitySelect">Միայն առկաները</label>
-            </div>
-
-            <div class="selected">
+                <div class="selected">
+                    {% if category_id == None %}
                     Select Product Cards
+                    {% else %}
+                        {% if category_id == 0 %}
+                        Բոլորը
+                        {% else %}
+                            {% for category in categories %}
+                                {% if category_id == category.id %}
+                                {{ category.name }}
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    {% endif %}
+                </div>
             </div>
         </div>
-    </div>
+    </form>
 
     <!-- Product Cards -->
     <div class="row">
@@ -87,13 +98,25 @@
 
     <!-- Pagination Bar -->
     <ul class="pagination">
-        <li><a href="#" class="prev">Prev</a></li>
-        <li class="pageNumber active"><a href="#">1</a></li>
-        <li class="pageNumber"><a href="#">2</a></li>
-        <li class="pageNumber"><a href="#">3</a></li>
-        <li class="pageNumber"><a href="#">4</a></li>
-        <li class="pageNumber"><a href="#">5</a></li>
-        <li><a href="#" class="next">Next</a></li>
+        {% if pagination.has_prev %}
+        <li><a href="{{ url_for('main.index', page=pagination.prev_num, category_id=category_id, availability=availability, search=search) }}" class="prev">Prev</a></li>
+        {% endif %}
+
+        {% for page in pagination.iter_pages() %}
+          {% if page %}
+            {% if page == pagination.page %}
+            <li class="pageNumber active"><a href="{{ url_for('main.index', page=page, category_id=category_id, availability=availability, search=search) }}">{{ page }}</a></li>
+            {% else %}
+            <li class="pageNumber"><a href="{{ url_for('main.index', page=page, category_id=category_id, availability=availability, search=search) }}">{{ page }}</a></li>
+            {% endif %}
+          {% else %}
+            <li><span>...</span></li>
+          {% endif %}
+        {% endfor %}
+
+        {% if pagination.has_next %}
+            <li><a href="{{ url_for('main.index', page=pagination.next_num, category_id=category_id, availability=availability, search=search) }}" class="next">Next</a></li>
+        {% endif %}
     </ul>
 </section>
 {% endblock %}
@@ -104,27 +127,17 @@
 
 <script src="{{ url_for('static', filename='js/index.js') }}"></script>
 <script src="{{ url_for('static', filename='js/filter.js') }}"></script>
+<script src="{{ url_for('static', filename='js/pagination.js') }}"></script>
 
 <script type="text/javascript">
     AOS.init({
         offset: 200,
         duration: 1200,
     });
+
+    console.log("category_id: {{ category_id }}");
+    console.log("page: {{ page }}");
+    console.log("availability: {{ availability }}");
+    console.log("search: {{ search }}");
  </script>
-<script type="text/javascript">
-        $(document).ready(function(){
-            $('.next').click(function(){
-              $('.pagination').find('.pageNumber.active').next().
-                addClass('active');
-                $('.pagination').find('.pageNumber.active').prev().
-                removeClass('active');
-            })
-            $('.prev').click(function(){
-              $('.pagination').find('.pageNumber.active').prev().
-                addClass('active');
-                $('.pagination').find('.pageNumber.active').next().
-                removeClass('active');
-            })
-        })
-    </script>
 {% endblock %}
