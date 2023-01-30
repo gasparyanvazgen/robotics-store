@@ -22,7 +22,7 @@
 <section class="products" id="products">
     <h1 class="heading">Ռոբոտաշինական <span>ապրանքներ</span></h1>
 
-    <form action="{{url_for('main.index')}}" method="get" id="filter-form">
+    <form action="{{url_for('main.index')}}#products" method="get" id="filter-form">
         <div class="container">
             <div class="select-box">
                 <div class="search">
@@ -102,7 +102,7 @@
       <ul>
         {% if pagination.has_prev %}
           <li class="btn prev">
-            <a href="{{ url_for('main.index', page=pagination.prev_num, category_id=category_id, availability=availability, search=search) }}">
+            <a href="{{ url_for('main.index', page=pagination.prev_num, category_id=category_id, availability=availability, search=search) }}#products">
               <span><i class="fas fa-angle-left"></i> Նախորդ</span>
             </a>
           </li>
@@ -110,7 +110,7 @@
 
         {% if pagination.page > 3 %}
           <li class="first numb">
-            <a href="{{ url_for('main.index', page=1, category_id=category_id, availability=availability, search=search) }}">
+            <a href="{{ url_for('main.index', page=1, category_id=category_id, availability=availability, search=search) }}#products">
               <span>1</span>
             </a>
           </li>
@@ -121,21 +121,21 @@
 
         {% if pagination.page > 1 %}
           <li class="numb">
-            <a href="{{ url_for('main.index', page=pagination.page-1, category_id=category_id, availability=availability, search=search) }}">
+            <a href="{{ url_for('main.index', page=pagination.page-1, category_id=category_id, availability=availability, search=search) }}#products">
               <span>{{ pagination.page - 1 }}</span>
             </a>
           </li>
         {% endif %}
 
         <li class="numb active">
-          <a href="{{ url_for('main.index', page=pagination.page, category_id=category_id, availability=availability, search=search) }}">
+          <a href="{{ url_for('main.index', page=pagination.page, category_id=category_id, availability=availability, search=search) }}#products">
             <span>{{ pagination.page }}</span>
           </a>
         </li>
 
         {% if pagination.page < pagination.pages %}
           <li class="numb">
-            <a href="{{ url_for('main.index', page=pagination.page+1, category_id=category_id, availability=availability, search=search) }}">
+            <a href="{{ url_for('main.index', page=pagination.page+1, category_id=category_id, availability=availability, search=search) }}#products">
               <span>{{ pagination.page + 1 }}</span>
             </a>
           </li>
@@ -146,7 +146,7 @@
             <span>...</span>
           </li>
           <li class="last numb">
-            <a href="{{ url_for('main.index', page=pagination.pages, category_id=category_id, availability=availability, search=search) }}">
+            <a href="{{ url_for('main.index', page=pagination.pages, category_id=category_id, availability=availability, search=search) }}#products">
               <span>{{ pagination.pages }}</span>
             </a>
           </li>
@@ -154,7 +154,7 @@
 
         {% if pagination.page < pagination.pages %}
           <li class="btn next">
-            <a href="{{ url_for('main.index', page=pagination.page+1, category_id=category_id, availability=availability, search=search) }}">
+            <a href="{{ url_for('main.index', page=pagination.page+1, category_id=category_id, availability=availability, search=search) }}#products">
               <span>Հաջորդ <i class="fas fa-angle-right"></i></span>
             </a>
           </li>
