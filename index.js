@@ -1,10 +1,10 @@
-button_btn = document.querySelector(".button-btn")
+button_btn = document.querySelector('.button-btn')
 
 button_btn.onclick = function() {
-    this.innerHTML = "<div class='loader'></div>";
+    this.innerHTML = '<div class="loader"></div>';
     setTimeout(() => {
-        this.innerHTML = "Error :)";
-        this.style = "background: #ff7200; color: #fff; pointer-events: none";
+        this.innerHTML = 'Error :)';
+        this.style = 'background: #ff7200; color: #fff; pointer-events: none';
     }, 5000);
 }
 
@@ -27,79 +27,86 @@ function clickHandlear(e) {
     });
 }
 
-/* Type */
+// Type
 
-const selected = document.querySelector(".selected");
-const optionsContainer = document.querySelector(".options-container");
+const selected = document.querySelector('.selected');
+const optionsContainer = document.querySelector('.options-container');
 
-const optionsList = document.querySelectorAll(".option");
+const optionsList = document.querySelectorAll('.option');
 
-selected.addEventListener("click", () => {
-    optionsContainer.classList.toggle("active");
+selected.addEventListener('click', () => {
+  optionsContainer.classList.toggle('active');
 });
 
 optionsList.forEach(o => {
-    o.addEventListener("click", () => {
-      selected.innerHTML = o.querySelector("label").innerHTML;
-      optionsContainer.classList.remove("active");
-    });
+  o.addEventListener('click', () => {
+    selected.innerHTML = o.querySelector('label').innerHTML;
+    optionsContainer.classList.remove('active');
+  });
 });
 
 
-/* Product Cards */
+// Back and Next
 
-class TabbedContent {
-    constructor() {
-      this.tabs = document.querySelectorAll(".nav li");
-      this.sections = document.querySelectorAll(".section");
-      this.nextButton = document.querySelector("#nextBtn");
-      this.prevButton = document.querySelector("#prevBtn");
-      this.current = 0;
+const element = document.querySelector('.pagination ul');
+let totalPages = 25;
+let page = 10;
+
+
+element.innerHTML = createPagination(totalPages, page);
+function createPagination(totalPages, page){
+  let liTag = '';
+  let active;
+  let beforePage = page - 1;
+  let afterPage = page + 1;
+  if (page > 1) {
+    liTag += `<li class="btn prev" onclick="createPagination(totalPages, ${page - 1})"><span><i class="fas fa-angle-left"></i> Back</span></li>`;
+  }
+
+  if (page > 2) {
+    liTag += `<li class="first numb" onclick="createPagination(totalPages, 1)"><span>1</span></li>`;
+    if (page > 3) {
+      liTag += `<li class="dots"><span>...</span></li>`;
     }
-  
-    toggleTabs() {
-      this.tabs.forEach(function(tab) {
-        tab.classList.remove('active');
-      });
-      this.tabs[this.current].classList.add("active");
+  }
+
+  if (page == totalPages) {
+    beforePage = beforePage - 2;
+  } else if (page == totalPages - 1) {
+    beforePage = beforePage - 1;
+  }
+
+  if (page == 1) {
+    afterPage = afterPage + 2;
+  } else if (page == 2) {
+    afterPage  = afterPage + 1;
+  }
+
+  for (let plength = beforePage; plength <= afterPage; plength++) {
+    if (plength > totalPages) {
+      continue;
     }
-  
-    toggleSections() {
-      this.sections.forEach(function(section) {
-        section.classList.remove('active');
-      });
-      this.sections[this.current].classList.add("active");
+    if (plength == 0) {
+      plength = plength + 1;
     }
-  
-    togglePrev() {
-      const method = this.current == 0 ? 'add' : 'remove';
-      this.prevButton.classList[method]("disable");
+    if (page == plength) {
+      active = 'active';
+    } else {
+      active = '';
     }
-  
-    toggleNext() {
-      const method = this.current == this.tabs.length - 1 ? 'add' : 'remove';
-      this.nextButton.classList[method]("disable");
+    liTag += `<li class="numb ${active}" onclick="createPagination(totalPages, ${plength})"><span>${plength}</span></li>`;
+  }
+
+  if (page < totalPages - 1) {
+    if (page < totalPages - 2) {
+      liTag += `<li class="dots"><span>...</span></li>`;
     }
-  
-    goNext() {
-      if (this.current < this.tabs.length - 1) {
-        this.current++
-      }
-      this.toggleTabs();
-      this.toggleSections();
-      this.toggleNext();
-      this.togglePrev();
-    }
-  
-    goPrev() {
-      if (this.current > 0) {
-        this.current--
-      }
-      this.toggleTabs();
-      this.toggleSections();
-      this.toggleNext();
-      this.togglePrev();
-    }
+    liTag += `<li class="last numb" onclick="createPagination(totalPages, ${totalPages})"><span>${totalPages}</span></li>`;
+  }
+
+  if (page < totalPages) { 
+    liTag += `<li class="btn next" onclick="createPagination(totalPages, ${page + 1})"><span>Next <i class="fas fa-angle-right"></i></span></li>`;
+  }
+  element.innerHTML = liTag; 
+  return liTag; 
 }
-  
-const tabbedContent = new TabbedContent();

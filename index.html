@@ -19,9 +19,10 @@
     <div class="back"></div>
   
     <div class="content" data-aos="fade-right">
-        <h1>Welcome to Online Market</h1>
-        <p>Ստեղ կարա լինի կայքի վերաբերյալ փոքր տեքստ</p>
-
+        <h1>Բարի Գալուստ<br><span> Ռոբոտաշինության աշխարհ</span></h1>
+        <p>Կայքում կարող եք գտնել և գնել ձեզ անհրաժեշտ ապրանքները
+            <br> ցանկացած ռոբոտ կամ սարք պատրաստելու համար
+            <br>մաղթում ենք ձեզ բարի գնումներ</p>
         <button class="button-btn">Գնել</button>
         
     </div>
@@ -29,7 +30,7 @@
     <div class="intro">
         <a href="#products" title="" class="scroll-btn">
             <img src="Image/scroll-btn.jpg" alt="">
-            <h2>Scroll down for shoping</h2>
+            <h2>տեսնել ապրանքները</h2>
         </a>
     </div>
 
@@ -38,12 +39,11 @@
 
         <div class="container">
             <div class="select-box">
-
                 <div class="search">
                     <table class="search-box">
                         <tr>
                             <td>
-                                <input type="text" placeholder="Search..." />
+                                <input type="text" placeholder="Փնտրել..." />
                             </td>
                             <td>
                                 <a href="#"><i class="fas fa-search"></i></a>
@@ -53,6 +53,10 @@
                 </div>
 
                 <div class="options-container">
+                    <div class="option">
+                        <input type="radio" class="radio" id="all" name="category">
+                        <label for="all">Բոլորը</label>
+                    </div>
                     <div class="option">
                         <input type="radio" class="radio" id="sensor" name="category">
                         <label for="sensor">Sensor</label>
@@ -78,623 +82,132 @@
                         <label for="relay">Relay</label>
                     </div>
                 </div>
-
+            
                 <div class="checkbox-container">
                     <input type="checkbox" id="check1">
                     <label for="check1">Միայն առկաները</label>
                 </div>
-                
+
                 <div class="selected">
                     Select Product Cards
                 </div>
             </div>
         </div>
 
-        <section class="section section-one active">
-            <div class="box-container">
-                <div class="box">
-                    <span></span>
-                    <div class="image">
-                        <img src="Image/1.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h5>Sensor</h5>
-                        <h3>Esp8266</h3>
-                        <div class="price">3370 AMD</div>
-                    </div>
-                </div>
+        <!-- Product Card -->
 
-                <div class="box">
-                    <h2></h2>
-                    <div class="image">
-                        <img src="Image/2.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h5>Driver</h5>
-                        <h3>Motor driver</h3>
-                        <div class="price">980 AMD</div>
-                    </div>
+        <div class="all-products">
+            <div class="product">
+                <h2></h2>
+                <img src="Image/1.jpg">
+                <div class="product-info">
+                    <h4 class="product-title">Driver</h4>
+                    <h3 class="product-name">Motor Driver</h3>
+                    <p class="product-price">850 ֏</p>
                 </div>
-
-                <div class="box">
-                    <h2></h2>
-                    <div class="image">
-                        <img src="Image/3.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h5>Breadboard</h5>
-                        <h3>Solderless breadboard</h3>
-                        <div class="price">770 AMD</div>
-                    </div>
-                </div>
-    
-                <div class="box">
-                    <h2></h2>
-                    <div class="image">
-                        <img src="Image/4.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h5>Breadboard</h5>
-                        <h3>Solderless Breadboard</h3>
-                        <div class="price">1400 AMD</div>
-                    </div>
-                </div>
-
-                <div class="box">
-                    <h2></h2>
-                    <div class="image">
-                        <img src="Image/5.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h5>Microcontroller</h5>
-                        <h3>Arduino NANO</h3>
-                        <div class="price">8140 AMD</div>
-                    </div>
-                </div>
-
-                <div class="box">
-                    <h2></h2>
-                    <div class="image">
-                        <img src="Image/6.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h5>Relay</h5>
-                        <h3>Relay electromechanical</h3>
-                        <div class="price">860 AMD</div>
-                    </div>
-                </div>
-    
-                <div class="box">
-                    <h2></h2>
-                    <div class="image">
-                        <img src="Image/7.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h5>Relay</h5>
-                        <h3>Relay Module 24v</h3>
-                        <div class="price">1650 AMD</div>
-                    </div>
-                </div>
-    
-                <div class="box">
-                    <h2></h2>
-                    <div class="image">
-                        <img src="Image/8.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h5>Relay</h5>
-                        <h3>Relay Module 5v</h3>
-                        <div class="price">2000 AMD</div>
-                    </div>
-                </div>
-    
-                <div class="box">
-                    <h2></h2>
-                    <div class="image">
-                        <img src="Image/8.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h5>Relay</h5>
-                        <h3>Relay Module 5v</h3>
-                        <div class="price">2000 AMD</div>
-                    </div>
-                </div>
-            </div>    
-        </section>
-        <section class="section section-two">
-            <div class="box-container">
-                <div class="box">
-                    <h2></h2>
-                    <div class="image">
-                        <img src="Image/5.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h5>Microcontroller</h5>
-                        <h3>Arduino NANO</h3>
-                        <div class="price">8140 AMD</div>
-                    </div>
-                </div>
-
-                <div class="box">
-                    <h2></h2>
-                    <div class="image">
-                        <img src="Image/5.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h5>Microcontroller</h5>
-                        <h3>Arduino NANO</h3>
-                        <div class="price">8140 AMD</div>
-                    </div>
-                </div>
-
-                <div class="box">
-                    <h2></h2>
-                    <div class="image">
-                        <img src="Image/5.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h5>Microcontroller</h5>
-                        <h3>Arduino NANO</h3>
-                        <div class="price">8140 AMD</div>
-                    </div>
-                </div>
-    
-                <div class="box">
-                    <h2></h2>
-                    <div class="image">
-                        <img src="Image/5.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h5>Microcontroller</h5>
-                        <h3>Arduino NANO</h3>
-                        <div class="price">8140 AMD</div>
-                    </div>
-                </div>
-
-                <div class="box">
-                    <h2></h2>
-                    <div class="image">
-                        <img src="Image/5.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h5>Microcontroller</h5>
-                        <h3>Arduino NANO</h3>
-                        <div class="price">8140 AMD</div>
-                    </div>
-                </div>
-
-                <div class="box">
-                    <h2></h2>
-                    <div class="image">
-                        <img src="Image/5.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h5>Microcontroller</h5>
-                        <h3>Arduino NANO</h3>
-                        <div class="price">8140 AMD</div>
-                    </div>
-                </div>
-    
-                <div class="box">
-                    <h2></h2>
-                    <div class="image">
-                        <img src="Image/5.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h5>Microcontroller</h5>
-                        <h3>Arduino NANO</h3>
-                        <div class="price">8140 AMD</div>
-                    </div>
-                </div>
-    
-                <div class="box">
-                    <h2></h2>
-                    <div class="image">
-                        <img src="Image/5.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h5>Microcontroller</h5>
-                        <h3>Arduino NANO</h3>
-                        <div class="price">8140 AMD</div>
-                    </div>
-                </div>
-    
-                <div class="box">
-                    <h2></h2>
-                    <div class="image">
-                        <img src="Image/5.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h5>Microcontroller</h5>
-                        <h3>Arduino NANO</h3>
-                        <div class="price">8140 AMD</div>
-                    </div>
-                </div>
-            </div>    
-        </section>
-        <section class="section section-three">
-            <div class="box-container">
-                <div class="box">
-                    <h2></h2>
-                    <div class="image">
-                        <img src="Image/6.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h5>Relay</h5>
-                        <h3>Relay electromechanical</h3>
-                        <div class="price">860 AMD</div>
-                    </div>
-                </div>
-
-                <div class="box">
-                    <h2></h2>
-                    <div class="image">
-                        <img src="Image/6.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h5>Relay</h5>
-                        <h3>Relay electromechanical</h3>
-                        <div class="price">860 AMD</div>
-                    </div>
-                </div>
-
-                <div class="box">
-                    <h2></h2>
-                    <div class="image">
-                        <img src="Image/6.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h5>Relay</h5>
-                        <h3>Relay electromechanical</h3>
-                        <div class="price">860 AMD</div>
-                    </div>
-                </div>
-    
-                <div class="box">
-                    <h2></h2>
-                    <div class="image">
-                        <img src="Image/6.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h5>Relay</h5>
-                        <h3>Relay electromechanical</h3>
-                        <div class="price">860 AMD</div>
-                    </div>
-                </div>
-
-                <div class="box">
-                    <h2></h2>
-                    <div class="image">
-                        <img src="Image/6.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h5>Relay</h5>
-                        <h3>Relay electromechanical</h3>
-                        <div class="price">860 AMD</div>
-                    </div>
-                </div>
-
-                <div class="box">
-                    <h2></h2>
-                    <div class="image">
-                        <img src="Image/6.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h5>Relay</h5>
-                        <h3>Relay electromechanical</h3>
-                        <div class="price">860 AMD</div>
-                    </div>
-                </div>
-    
-                <div class="box">
-                    <h2></h2>
-                    <div class="image">
-                        <img src="Image/6.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h5>Relay</h5>
-                        <h3>Relay electromechanical</h3>
-                        <div class="price">860 AMD</div>
-                    </div>
-                </div>
-    
-                <div class="box">
-                    <h2></h2>
-                    <div class="image">
-                        <img src="Image/6.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h5>Relay</h5>
-                        <h3>Relay electromechanical</h3>
-                        <div class="price">860 AMD</div>
-                    </div>
-                </div>
-    
-                <div class="box">
-                    <h2></h2>
-                    <div class="image">
-                        <img src="Image/6.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h5>Relay</h5>
-                        <h3>Relay electromechanical</h3>
-                        <div class="price">860 AMD</div>
-                    </div>
-                </div>
-            </div>    
-        </section>
-        <section class="section section-four"> 
-            <div class="box-container">
-                <div class="box">
-                    <h2></h2>
-                    <div class="image">
-                        <img src="Image/7.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h5>Relay</h5>
-                        <h3>Relay Module 24v</h3>
-                        <div class="price">1650 AMD</div>
-                    </div>
-                </div>
-
-                <div class="box">
-                    <h2></h2>
-                    <div class="image">
-                        <img src="Image/7.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h5>Relay</h5>
-                        <h3>Relay Module 24v</h3>
-                        <div class="price">1650 AMD</div>
-                    </div>
-                </div>
-
-                <div class="box">
-                    <h2></h2>
-                    <div class="image">
-                        <img src="Image/7.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h5>Relay</h5>
-                        <h3>Relay Module 24v</h3>
-                        <div class="price">1650 AMD</div>
-                    </div>
-                </div>
-    
-                <div class="box">
-                    <h2></h2>
-                    <div class="image">
-                        <img src="Image/7.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h5>Relay</h5>
-                        <h3>Relay Module 24v</h3>
-                        <div class="price">1650 AMD</div>
-                    </div>
-                </div>
-
-                <div class="box">
-                    <h2></h2>
-                    <div class="image">
-                        <img src="Image/7.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h5>Relay</h5>
-                        <h3>Relay Module 24v</h3>
-                        <div class="price">1650 AMD</div>
-                    </div>
-                </div>
-
-                <div class="box">
-                    <h2></h2>
-                    <div class="image">
-                        <img src="Image/7.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h5>Relay</h5>
-                        <h3>Relay Module 24v</h3>
-                        <div class="price">1650 AMD</div>
-                    </div>
-                </div>
-    
-                <div class="box">
-                    <h2></h2>
-                    <div class="image">
-                        <img src="Image/7.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h5>Relay</h5>
-                        <h3>Relay Module 24v</h3>
-                        <div class="price">1650 AMD</div>
-                    </div>
-                </div>
-    
-                <div class="box">
-                    <h2></h2>
-                    <div class="image">
-                        <img src="Image/7.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h5>Relay</h5>
-                        <h3>Relay Module 24v</h3>
-                        <div class="price">1650 AMD</div>
-                    </div>
-                </div>
-    
-                <div class="box">
-                    <h2></h2>
-                    <div class="image">
-                        <img src="Image/7.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h5>Relay</h5>
-                        <h3>Relay Module 24v</h3>
-                        <div class="price">1650 AMD</div>
-                    </div>
-                </div>
-            </div>    
-        </section>
-        <section class="section section-five">
-            <div class="box-container">
-                <div class="box">
-                    <h2></h2>
-                    <div class="image">
-                        <img src="Image/8.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h5>Relay</h5>
-                        <h3>Relay Module 5v</h3>
-                        <div class="price">2000 AMD</div>
-                    </div>
-                </div>
-
-                <div class="box">
-                    <h2></h2>
-                    <div class="image">
-                        <img src="Image/8.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h5>Relay</h5>
-                        <h3>Relay Module 5v</h3>
-                        <div class="price">2000 AMD</div>
-                    </div>
-                </div>
-
-                <div class="box">
-                    <h2></h2>
-                    <div class="image">
-                        <img src="Image/8.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h5>Relay</h5>
-                        <h3>Relay Module 5v</h3>
-                        <div class="price">2000 AMD</div>
-                    </div>
-                </div>
-    
-                <div class="box">
-                    <h2></h2>
-                    <div class="image">
-                        <img src="Image/8.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h5>Relay</h5>
-                        <h3>Relay Module 5v</h3>
-                        <div class="price">2000 AMD</div>
-                    </div>
-                </div>
-
-                <div class="box">
-                    <h2></h2>
-                    <div class="image">
-                        <img src="Image/8.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h5>Relay</h5>
-                        <h3>Relay Module 5v</h3>
-                        <div class="price">2000 AMD</div>
-                    </div>
-                </div>
-
-                <div class="box">
-                    <h2></h2>
-                    <div class="image">
-                        <img src="Image/8.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h5>Relay</h5>
-                        <h3>Relay Module 5v</h3>
-                        <div class="price">2000 AMD</div>
-                    </div>
-                </div>
-    
-                <div class="box">
-                    <h2></h2>
-                    <div class="image">
-                        <img src="Image/8.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h5>Relay</h5>
-                        <h3>Relay Module 5v</h3>
-                        <div class="price">2000 AMD</div>
-                    </div>
-                </div>
-    
-                <div class="box">
-                    <h2></h2>
-                    <div class="image">
-                        <img src="Image/8.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h5>Relay</h5>
-                        <h3>Relay Module 5v</h3>
-                        <div class="price">2000 AMD</div>
-                    </div>
-                </div>
-    
-                <div class="box">
-                    <h2></h2>
-                    <div class="image">
-                        <img src="Image/8.jpg" alt="">
-                    </div>
-                    <div class="text">
-                        <h5>Relay</h5>
-                        <h3>Relay Module 5v</h3>
-                        <div class="price">2000 AMD</div>
-                    </div>
-                </div>
-            </div>    
-        </section>
-
-
-        <div class="products-card">
-            <ul class="nav">
-                <li class="active">1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li>5</li>
-            </ul>
-   
-            <button class="previous disable" id="prevBtn" onclick="tabbedContent.goPrev()">Previous</button>
-            <button class="next" id="nextBtn" onclick="tabbedContent.goNext()"> Next </button>
             </div>
+            <div class="product">
+                <h1></h1>
+                <img src="Image/1.jpg">
+                <div class="product-info">
+                    <h4 class="product-title">Driver</h4>
+                    <h3 class="product-name">Motor Driver</h3>
+                    <p class="product-price">850 ֏</p>
+                </div>
+            </div>
+            <div class="product">
+                <h2></h2>
+                <img src="Image/1.jpg">
+                <div class="product-info">
+                    <h4 class="product-title">Driver</h4>
+                    <h3 class="product-name">Motor Driver</h3>
+                    <p class="product-price">850 ֏</p>
+                </div>
+            </div>
+            <div class="product">
+                <h1></h1>
+                <img src="Image/1.jpg">
+                <div class="product-info">
+                    <h4 class="product-title">Driver</h4>
+                    <h3 class="product-name">Motor Driver</h3>
+                    <p class="product-price">850 ֏</p>
+                </div>
+            </div>
+            <div class="product">
+                <h1></h1>
+                <img src="Image/1.jpg">
+                <div class="product-info">
+                    <h4 class="product-title">Driver</h4>
+                    <h3 class="product-name">Motor Driver</h3>
+                    <p class="product-price">850 ֏</p>
+                </div>
+            </div>
+            <div class="product">
+                <h2></h2>
+                <img src="Image/1.jpg">
+                <div class="product-info">
+                    <h4 class="product-title">Driver</h4>
+                    <h3 class="product-name">Motor Driver</h3>
+                    <p class="product-price">850 ֏</p>
+                </div>
+            </div>
+            <div class="product">
+                <h1></h1>
+                <img src="Image/1.jpg">
+                <div class="product-info">
+                    <h4 class="product-title">Driver</h4>
+                    <h3 class="product-name">Motor Driver</h3>
+                    <p class="product-price">850 ֏</p>
+                </div>
+            </div>
+            <div class="product">
+                <h2></h2>
+                <img src="Image/1.jpg">
+                <div class="product-info">
+                    <h4 class="product-title">Driver</h4>
+                    <h3 class="product-name">Motor Driver</h3>
+                    <p class="product-price">850 ֏</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="pagination">
+            <ul>
+                <li class="btn prev"><span><i class="fas fa-angle-left"></i> Back</span></li>
+                <li class="numb active"><span>1</span></li>
+                <li class="numb"><span>2</span></li>
+                <li class="dots"><span>...</span></li>
+                <li class="numb"><span>4</span></li>
+                <li class="numb"><span>5</span></li>
+                <li class="dots"><span>...</span></li>
+                <li class="numb"><span>7</span></li>
+                <li class="btn next"><span>Next <i class="fas fa-angle-right"></i></span></li>
+            </ul>
         </div>
     </section>
 
-
     <section class="footer">
-        <h3>Online Market</h3>
+        <h3>Robo Shop</h3>
         <p>About us:</p>
         <div class="button">
             <div class="icon">
                 <a href="#"><i class="fa-brands fa-facebook"></i></a>
             </div>
-            <span>Facebook</span>
         </div>
         <div class="button">
             <div class="icon">
                 <a href="#"><i class="fa-solid fa-envelope"></i></a>
             </div>
-            <span>Message</span>
         </div>
         <div class="button">
             <div class="icon">
                 <a href="#"><i class="fa-brands fa-instagram"></i></a>
             </div>
-            <span>Instagram</span>
-        </div>
-        <div class="button">
-            <div class="icon">
-                <a href="#"><i class="fa-solid fa-phone"></i></a>
-            </div>
-            <span>094000000</span>
         </div>
         <div class="button">
             <div class="icon">
                 <a href="#"><i class="fa-brands fa-youtube"></i></a>
             </div>
-            <span>YouTube</span>
         </div>
 
         <div class="copyright">
@@ -711,6 +224,8 @@
           offset: 200,
           duration: 1200,
       });
-      </script>
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
 </body>
 </html>
