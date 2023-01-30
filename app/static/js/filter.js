@@ -10,7 +10,4 @@ $(document).ready(function() {
             document.getElementById("filter-form").submit();
         }
     });
-    $('#search').on('click', function() {
-        document.getElementById("filter-form").submit();
-    });
 });

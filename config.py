@@ -4,7 +4,7 @@ import secrets
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 IMAGE_UPLOADS = os.path.join(BASE_DIR, 'app/static/img/uploads')
 
-PRODUCTS_PER_PAGE = 2
+PRODUCTS_PER_PAGE = 1
 
 
 class Config(object):
