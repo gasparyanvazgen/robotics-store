@@ -2,40 +2,33 @@
 {% block title %}RoboShop{% endblock %}
 
 {% block content %}
-<div class="back"></div>
+<div class="back">
+    <section id="intro">
+        <a id="scroll-btn" href="#products"></a>
+    </section>
+</div>
 
 <div class="content" data-aos="fade-right">
-    <h1>Բարի Գալուստ<br><span> Ռոբոտաշինության աշխարհ</span></h1>
+    <h1>Բարի Գալուստ<br><span>Ռոբոտաշինության աշխարհ</span></h1>
     <p>Կայքում կարող եք գտնել և գնել Ձեզ անհրաժեշտ ապրանքները
-        <br>ցանկացած ռոբոտ կամ սարք պատրաստելու համար:
-        <br>Մաղթում ենք Ձեզ բարի գնումներ...</p>
-    <button class="button-btn">Գնել</button>
+        <br>ցանկացած ռոբոտ կամ սարք պատրաստելու համար
+        <br>մաղթում ենք Ձեզ բարի գնումներ...
+    </p>
+    <button onclick="doSomething()">Գնել</button>
+    <p id="test"></p>
 </div>
 
-<div class="intro">
-    <a href="#products" title="" class="scroll-btn">
-        <img src="{{ url_for('static', filename='img/scroll-btn.jpg') }}" alt="">
-        <h2>Տեսնել ապրանքները</h2>
-    </a>
-</div>
+<section class="products">
+    <h1 class="heading" id="products">Ռոբոտաշինական <span>ապրանքներ</span></h1>
 
-<section class="products" id="products">
-    <h1 class="heading">Ռոբոտաշինական <span>ապրանքներ</span></h1>
-
-    <form action="{{url_for('main.index')}}#products" method="get" id="filter-form">
+    <form action="{{url_for('main.index')}}#products" method="GET">
         <div class="container">
             <div class="select-box">
                 <div class="search">
-                    <table class="search-box">
-                        <tr>
-                            <td>
-                                <input type="text" id="searchInput" name="search" placeholder="Փնտրել..." {% if search %}value="{{ search }}"{% endif %} />
-                            </td>
-                            <td>
-                                <button><i class="fas fa-search"></i></button>
-                            </td>
-                        </tr>
-                    </table>
+                    <div class="search-box">
+                        <input type="text" name="search" placeholder="Որոնել․․․" {% if search %}value="{{ search }}"{% endif %} />
+                        <button type="submit">Փնտրել</button>
+                    </div>
                 </div>
                 <div class="options-container" id="categorySelect">
                     <div class="option">
@@ -101,63 +94,63 @@
     <div class="pagination">
       <ul>
         {% if pagination.has_prev %}
-          <li class="btn prev">
-            <a href="{{ url_for('main.index', page=pagination.prev_num, category_id=category_id, availability=availability, search=search) }}#products">
+          <a href="{{ url_for('main.index', page=pagination.prev_num, category_id=category_id, availability=availability, search=search) }}#products">
+            <li class="btn prev">
               <span><i class="fas fa-angle-left"></i> Նախորդ</span>
-            </a>
-          </li>
+            </li>
+          </a>
         {% endif %}
 
         {% if pagination.page > 3 %}
-          <li class="first numb">
-            <a href="{{ url_for('main.index', page=1, category_id=category_id, availability=availability, search=search) }}#products">
+          <a href="{{ url_for('main.index', page=1, category_id=category_id, availability=availability, search=search) }}#products">
+            <li class="first numb">
               <span>1</span>
-            </a>
-          </li>
+            </li>
+          </a>
           <li class="dots">
             <span>...</span>
           </li>
         {% endif %}
 
         {% if pagination.page > 1 %}
-          <li class="numb">
-            <a href="{{ url_for('main.index', page=pagination.page-1, category_id=category_id, availability=availability, search=search) }}#products">
+          <a href="{{ url_for('main.index', page=pagination.page-1, category_id=category_id, availability=availability, search=search) }}#products">
+            <li class="numb">
               <span>{{ pagination.page - 1 }}</span>
-            </a>
-          </li>
+            </li>
+          </a>
         {% endif %}
 
-        <li class="numb active">
-          <a href="{{ url_for('main.index', page=pagination.page, category_id=category_id, availability=availability, search=search) }}#products">
-            <span>{{ pagination.page }}</span>
-          </a>
-        </li>
+        <a href="{{ url_for('main.index', page=pagination.page, category_id=category_id, availability=availability, search=search) }}#products">
+            <li class="numb active">
+                <span>{{ pagination.page }}</span>
+            </li>
+        </a>
 
         {% if pagination.page < pagination.pages %}
-          <li class="numb">
-            <a href="{{ url_for('main.index', page=pagination.page+1, category_id=category_id, availability=availability, search=search) }}#products">
+          <a href="{{ url_for('main.index', page=pagination.page+1, category_id=category_id, availability=availability, search=search) }}#products">
+            <li class="numb">
               <span>{{ pagination.page + 1 }}</span>
-            </a>
-          </li>
+            </li>
+          </a>
         {% endif %}
 
         {% if pagination.page < pagination.pages - 2 %}
           <li class="dots">
             <span>...</span>
           </li>
-          <li class="last numb">
-            <a href="{{ url_for('main.index', page=pagination.pages, category_id=category_id, availability=availability, search=search) }}#products">
+          <a href="{{ url_for('main.index', page=pagination.pages, category_id=category_id, availability=availability, search=search) }}#products">
+            <li class="last numb">
               <span>{{ pagination.pages }}</span>
-            </a>
-          </li>
+            </li>
+          </a>
         {% endif %}
 
         {% if pagination.page < pagination.pages %}
-          <li class="btn next">
-            <a href="{{ url_for('main.index', page=pagination.page+1, category_id=category_id, availability=availability, search=search) }}#products">
+          <a href="{{ url_for('main.index', page=pagination.page+1, category_id=category_id, availability=availability, search=search) }}#products">
+            <li class="btn next">
               <span>Հաջորդ <i class="fas fa-angle-right"></i></span>
-            </a>
-          </li>
+            </li>
+          </a>
         {% endif %}
       </ul>
     </div>
@@ -170,8 +163,6 @@
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 
 <script src="{{ url_for('static', filename='js/index.js') }}"></script>
-<script src="{{ url_for('static', filename='js/filter.js') }}"></script>
-<script src="{{ url_for('static', filename='js/pagination.js') }}"></script>
 
 <script type="text/javascript">
     AOS.init({
