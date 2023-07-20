@@ -88,6 +88,7 @@ class ProductView(CustomModelView):
         image = form.image.data
         if image:
             # Generate a random filename for the image
+            # TODO: that seems to be the problem, i don't need to generate the name again but take the already existing name and use it
             filename = generate_random_image_name(None, image)
              # Create a reference to the Firebase Storage bucket and upload the image
             bucket = firebase_storage.bucket()
