@@ -1,6 +1,13 @@
 ## Robotics Store
 
 ##### Before running
+Run the following in your terminal, then follow the onscreen instructions.
+You appear to be running Unix. If not, visit https://rustup.rs/
+```shell
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+# source "$HOME/.cargo/env"
+```
+
 Open CLI and to do these commands for you (examples for Linux/MacOS)
 ```shell
 pip install -r requirements.txt

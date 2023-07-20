@@ -1,6 +1,7 @@
 import os
 import secrets
 
+from firebase_admin import storage as firebase_storage
 from flask import redirect, url_for, Markup
 from flask_admin import BaseView, AdminIndexView, expose
 from flask_admin.contrib.sqla import ModelView
@@ -79,13 +80,40 @@ class ProductView(CustomModelView):
                                   max_size=(1000, 1000, False))
     }
 
+    def on_model_change(self, form, model, is_created):
+        # TODO: change the code to properly store the image in firebase
+        # Call the parent on_model_change() method to save the model to the database
+        super().on_model_change(form, model, is_created)
+         # Upload the image to Firebase Storage
+        image = form.image.data
+        if image:
+            # Generate a random filename for the image
+            filename = generate_random_image_name(None, image)
+             # Create a reference to the Firebase Storage bucket and upload the image
+            bucket = firebase_storage.bucket()
+            blob = bucket.blob(filename)
+             # Set the content type of the image for proper display in Firebase Storage
+            blob.content_type = image.content_type
+             # Save the image to a local file before uploading
+            local_filepath = os.path.join(IMAGE_UPLOADS, filename)
+            image.save(local_filepath)
+             # Upload the image file to Firebase Storage
+            blob.upload_from_filename(local_filepath, content_type=image.content_type)
+             # Set the model's image field to the Firebase Storage URL
+            model.image = f'https://storage.googleapis.com/{bucket.name}/{filename}'
+             # Save the updated model to the database
+            # self.session.commit()  # Removed for batch processing
+             # Add the model to a batch for batch processing
+            self.session.add(model)
+             # Remove the local image file after uploading asynchronously
+            # delete_local_image_file.delay(local_filepath)
+
     def _list_thumbnail(self, context, model, name):
-        # Generate thumbnail image for model object
+        # Use the Firebase Storage URL instead of the local file path
         if model.image:
-            url = url_for('static', filename=os.path.join('img/uploads/', model.image))
+            return Markup(f'<img src={model.image} width="100">')
         else:
-            url = url_for('static', filename='img/default_image.jpg')
-        return Markup(f'<img src={url} width="100">')
+            return Markup(f'<img src={url_for("static", filename="img/default_image.jpg")} width="100">')
 
     # Customize the data that is exported for the image and category columns
     def get_export_value(self, model, column):
