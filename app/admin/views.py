@@ -1,5 +1,6 @@
 import os
 import secrets
+from io import BytesIO
 
 from firebase_admin import storage as firebase_storage
 from flask import redirect, url_for, Markup
@@ -81,33 +82,32 @@ class ProductView(CustomModelView):
     }
 
     def on_model_change(self, form, model, is_created):
-        # TODO: change the code to properly store the image in firebase
         # Call the parent on_model_change() method to save the model to the database
         super().on_model_change(form, model, is_created)
-         # Upload the image to Firebase Storage
+
+        # Upload the image to Firebase Storage
         image = form.image.data
         if image:
-            # Generate a random filename for the image
-            # TODO: that seems to be the problem, i don't need to generate the name again but take the already existing name and use it
-            filename = generate_random_image_name(None, image)
-             # Create a reference to the Firebase Storage bucket and upload the image
+            filename = image.filename  # Use the existing image filename
+
+            # Create a reference to the Firebase Storage bucket and upload the image
             bucket = firebase_storage.bucket()
             blob = bucket.blob(filename)
-             # Set the content type of the image for proper display in Firebase Storage
+
+            # Set the content type of the image for proper display in Firebase Storage
             blob.content_type = image.content_type
-             # Save the image to a local file before uploading
-            local_filepath = os.path.join(IMAGE_UPLOADS, filename)
-            image.save(local_filepath)
-             # Upload the image file to Firebase Storage
-            blob.upload_from_filename(local_filepath, content_type=image.content_type)
-             # Set the model's image field to the Firebase Storage URL
-            model.image = f'https://storage.googleapis.com/{bucket.name}/{filename}'
-             # Save the updated model to the database
-            # self.session.commit()  # Removed for batch processing
-             # Add the model to a batch for batch processing
+
+            # Create an in-memory file-like object from the image data
+            image_bytes = BytesIO(image.read())
+
+            # Upload the image from the in-memory object to Firebase Storage
+            blob.upload_from_file(image_bytes, content_type=image.content_type)
+
+            # Set the model's image field to the Firebase Storage URL
+            model.image = blob.media_link
+
+            # Save the updated model to the database
             self.session.add(model)
-             # Remove the local image file after uploading asynchronously
-            # delete_local_image_file.delay(local_filepath)
 
     def _list_thumbnail(self, context, model, name):
         # Use the Firebase Storage URL instead of the local file path
