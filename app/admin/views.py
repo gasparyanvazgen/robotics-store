@@ -100,8 +100,12 @@ class ProductView(CustomModelView):
             # Create an in-memory file-like object from the image data
             image_bytes = BytesIO(image.read())
 
+            print(f"\n\nimage_bytes DUMP: {image_bytes.read()}\n\n")
+
             # Upload the image from the in-memory object to Firebase Storage
             blob.upload_from_file(image_bytes, content_type=image.content_type)
+
+            print(f"\n\nblob DUMP: {blob}\n\n")
 
             # Set the model's image field to the Firebase Storage URL
             model.image = blob.media_link
