@@ -36,8 +36,12 @@ def delete_image_from_firebase(image_url):
     # create a blob (object) with the same filename in the bucket
     blob = bucket.blob(filename)
 
-    # delete the blob (image) from Firebase Storage
-    blob.delete()
+    try:
+        # delete the blob (image) from Firebase Storage
+        blob.delete()
+    except Exception as e:
+        # handle any exceptions that may occur during deletion
+        print(f"Error deleting image {filename}: {e}")
 
 
 class CustomImageUploadField(ImageUploadField):
