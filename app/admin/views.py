@@ -25,12 +25,27 @@ def replace_within_markup(markup, old, new):
     new_unescaped_text = unescaped_text.replace(old, new)
     return Markup(new_unescaped_text)
 
+# deletes an image from Firebase Storage
+def delete_image_from_firebase(image_url):
+    # extract the image filename from the URL
+    filename = image_url.split('/')[-1]
+
+    # reference to the Firebase Storage bucket
+    bucket = firebase_storage.bucket()
+
+    # create a blob (object) with the same filename in the bucket
+    blob = bucket.blob(filename)
+
+    # delete the blob (image) from Firebase Storage
+    blob.delete()
+
 
 class CustomImageUploadField(ImageUploadField):
     def widget(self, field, **kwargs):
-        # Call the parent widget method to get the default HTML
+        # call the parent widget method to get the default HTML
         default_html = super().widget(field, **kwargs)
-        # Remove the checkbox input element from the HTML
+
+        # remove the checkbox input element from the HTML
         modified_html = replace_within_markup(default_html, '<input type="checkbox" name="_image-delete">Delete</input>', '')
 
         # add an image preview if the field has data
@@ -130,6 +145,14 @@ class ProductView(CustomModelView):
 
             # delete the local file after it's been successfully uploaded
             os.remove(os.path.join(IMAGE_UPLOADS, filename))
+
+    def delete_model(self, model):
+        # delete the image from Firebase Storage if it exists
+        if model.image:
+            delete_image_from_firebase(model.image)
+
+        # call the parent class's delete_model method
+        super().delete_model(model)
 
     def _list_thumbnail(self, context, model, name):
         # use the Firebase Storage URL instead of the local file path
