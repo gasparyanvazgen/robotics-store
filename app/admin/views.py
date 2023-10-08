@@ -1,6 +1,5 @@
 import os
 import secrets
-from io import BytesIO
 
 from firebase_admin import storage as firebase_storage
 from flask import redirect, url_for, Markup
@@ -19,6 +18,26 @@ from config import IMAGE_UPLOADS
 def generate_random_image_name(model, file_data):
     random_hex = secrets.token_hex(8)
     return random_hex
+
+# replaces text within a Markup object while preserving it as a Markup object
+def replace_within_markup(markup, old, new):
+    unescaped_text = markup.unescape()
+    new_unescaped_text = unescaped_text.replace(old, new)
+    return Markup(new_unescaped_text)
+
+
+class CustomImageUploadField(ImageUploadField):
+    def widget(self, field, **kwargs):
+        # Call the parent widget method to get the default HTML
+        default_html = super().widget(field, **kwargs)
+        # Remove the checkbox input element from the HTML
+        modified_html = replace_within_markup(default_html, '<input type="checkbox" name="_image-delete">Delete</input>', '')
+
+        # add an image preview if the field has data
+        if field.data:
+            modified_html = replace_within_markup(modified_html, f'<img src="/static/{field.data}">', f'<img src="{field.data}" class="image-preview">')
+
+        return modified_html
 
 
 class CustomBaseView(BaseView):
@@ -73,7 +92,7 @@ class ProductView(CustomModelView):
     form_extra_fields = {
         'price': IntegerField('Price', validators=[NumberRange(min=0)]),
         'amount': IntegerField('Amount', validators=[NumberRange(min=0)]),
-        'image': ImageUploadField('Upload image',
+        'image': CustomImageUploadField('Upload image',
                                   base_path=IMAGE_UPLOADS,
                                   url_relative_path='img/uploads/',
                                   namegen=generate_random_image_name,
@@ -88,8 +107,9 @@ class ProductView(CustomModelView):
         # upload the image to Firebase Storage
         image = form.image.data
         if image:
-            filename = image.filename  # use the existing image filename
-            print(f"filename: {filename}")
+            # use the existing image filename
+            filename = image.filename
+
             # reference to the Firebase Storage bucket
             bucket = firebase_storage.bucket()
 
@@ -107,6 +127,9 @@ class ProductView(CustomModelView):
 
             # save the updated model to the database
             self.session.add(model)
+
+            # delete the local file after it's been successfully uploaded
+            os.remove(os.path.join(IMAGE_UPLOADS, filename))
 
     def _list_thumbnail(self, context, model, name):
         # use the Firebase Storage URL instead of the local file path
