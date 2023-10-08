@@ -2,9 +2,9 @@ import os
 import secrets
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-IMAGE_UPLOADS = os.path.join(BASE_DIR, 'app/static/img/uploads')
+IMAGE_UPLOADS = os.path.join(BASE_DIR, 'app/static/img/uploads/')
 GOOGLE_APPLICATION_CREDENTIALS = 'serviceAccountKey.json'
-STORAGE_BUCKET = 'project_id.appspot.com' # TODO
+STORAGE_BUCKET = 'roboshop-node-firebase.appspot.com'
 
 PRODUCTS_PER_PAGE = 1
 

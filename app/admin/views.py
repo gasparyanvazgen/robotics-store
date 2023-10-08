@@ -15,7 +15,7 @@ from wtforms.validators import NumberRange
 from config import IMAGE_UPLOADS
 
 
-# Generates a filename from the model and the loaded file object
+# generates a filename from the model and the loaded file object
 def generate_random_image_name(model, file_data):
     random_hex = secrets.token_hex(8)
     return random_hex
@@ -30,7 +30,7 @@ class CustomBaseView(BaseView):
 
 
 class CustomModelView(ModelView):
-    # Enable data export for the view
+    # enable data export for the view
     can_export = True
 
     def is_accessible(self):
@@ -82,51 +82,46 @@ class ProductView(CustomModelView):
     }
 
     def on_model_change(self, form, model, is_created):
-        # Call the parent on_model_change() method to save the model to the database
+        # call the parent on_model_change() method to save the model to the database
         super().on_model_change(form, model, is_created)
 
-        # Upload the image to Firebase Storage
+        # upload the image to Firebase Storage
         image = form.image.data
         if image:
-            filename = image.filename  # Use the existing image filename
-
-            # Create a reference to the Firebase Storage bucket and upload the image
+            filename = image.filename  # use the existing image filename
+            print(f"filename: {filename}")
+            # reference to the Firebase Storage bucket
             bucket = firebase_storage.bucket()
+
+            # create a blob (object) with the same filename in the bucket
             blob = bucket.blob(filename)
 
-            # Set the content type of the image for proper display in Firebase Storage
-            blob.content_type = image.content_type
+            # upload the image file from the local system to Firebase Storage
+            blob.upload_from_filename(os.path.join(IMAGE_UPLOADS, filename))
 
-            # Create an in-memory file-like object from the image data
-            image_bytes = BytesIO(image.read())
+            # make the uploaded blob (image) publicly accessible
+            blob.make_public()
 
-            print(f"\n\nimage_bytes DUMP: {image_bytes.read()}\n\n")
+            # set the model's image field to the public URL of the uploaded image
+            model.image = blob.public_url
 
-            # Upload the image from the in-memory object to Firebase Storage
-            blob.upload_from_file(image_bytes, content_type=image.content_type)
-
-            print(f"\n\nblob DUMP: {blob}\n\n")
-
-            # Set the model's image field to the Firebase Storage URL
-            model.image = blob.media_link
-
-            # Save the updated model to the database
+            # save the updated model to the database
             self.session.add(model)
 
     def _list_thumbnail(self, context, model, name):
-        # Use the Firebase Storage URL instead of the local file path
+        # use the Firebase Storage URL instead of the local file path
         if model.image:
             return Markup(f'<img src={model.image} width="100">')
         else:
             return Markup(f'<img src={url_for("static", filename="img/default_image.jpg")} width="100">')
 
-    # Customize the data that is exported for the image and category columns
+    # customize the data that is exported for the image and category columns
     def get_export_value(self, model, column):
-        # Generate absolute URL with hostname included for image column
+        # generate absolute URL with hostname included for image column
         if column == 'image':
-            return url_for('static', filename=os.path.join('img/uploads/', model.image), _external=True)
+            return url_for('static', filename=os.path.join(IMAGE_UPLOADS, model.image), _external=True)
 
-        # Return default value for other columns
+        # return default value for other columns
         return super(ProductView, self).get_export_value(model, column)
 
 
