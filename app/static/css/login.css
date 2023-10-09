@@ -189,6 +189,12 @@ html{
     text-align: center;
 }
 
+.wrapper .alert {
+    font-size: 14px;
+    margin-top: 5px;
+    color: white;
+}
+
 .wrapper .input-box {
     position: relative;
     width: 100%;
@@ -219,7 +225,6 @@ html{
     color: #fff;
     font-weight: 600;
     padding: 0 35px 0 5px;
-    text-transform: lowercase;
 }
 
 .input-box .icon{
