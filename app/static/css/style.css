@@ -63,6 +63,7 @@ html{
     height: 35px;
     width: 35px;
     display: block;
+    color: #000;
     background: #fff;
     text-align: center;
     border-radius: 50%;
@@ -1068,6 +1069,7 @@ a#scroll-btn:after {
     height: 50px;
     width: 50px;
     display: block;
+    color: #000;
     background: #fff;
     text-align: center;
     border-radius: 50%;
