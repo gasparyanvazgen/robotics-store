@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %} {% endblock %}</title>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    {% block css %} {% endblock %}
 </head>
 <body>
 {% block body %}
@@ -14,7 +14,9 @@
     {% block header %}
     <header class="header">
         <div class="logo">
-            <a href="{{ url_for('main.index') }}">Robo Shop</a>
+            <a href="{{ url_for('main.index') }}">
+                <img src="{{ url_for('static', filename='img/roboshop_logo.png') }}" alt="Robo Shop logo">
+            </a>
         </div>
         <div class="icons">
             <div class="icon facebook">
@@ -57,7 +59,7 @@
                 <span><i class="fa-regular fa-envelope"></i></span>
             </div>
             <div class="icon phone">
-                <div class="tooltip">+3740000000</div>
+                <div class="tooltip">093000000</div>
                 <span><i class="fa-solid fa-phone"></i></span>
             </div>
         </div>

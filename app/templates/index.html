@@ -1,33 +1,37 @@
 {% extends "base.html" %}
 {% block title %}RoboShop{% endblock %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="https://unpkg.com/aos@next/dist/aos.css" />
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% endblock %}
 
 {% block content %}
 <div class="back">
-    <section id="intro">
-        <a id="scroll-btn" href="#products"></a>
-    </section>
+  <section id="intro">
+    <a id="scroll-btn" href="#products"></a>
+  </section>
 </div>
 
 <div class="content" data-aos="fade-right">
-    <h1>Բարի Գալուստ<br><span>Ռոբոտաշինության աշխարհ</span></h1>
-    <p>Կայքում կարող եք գտնել և գնել Ձեզ անհրաժեշտ ապրանքները
-        <br>ցանկացած ռոբոտ կամ սարք պատրաստելու համար
-        <br>մաղթում ենք Ձեզ բարի գնումներ...
-    </p>
-    <button onclick="doSomething()">Գնել</button>
-    <p id="test"></p>
+  <h1>Բարի Գալուստ<br><span> Ռոբոտաշինության աշխարհ</span></h1>
+  <p>Կայքում կարող եք գտնել և գնել ձեզ անհրաժեշտ ապրանքները
+      <br> ցանկացած ռոբոտ կամ սարք պատրաստելու համար
+      <br>մաղթում ենք ձեզ բարի գնումներ
+  </p>
+  <button class="gradient-btn" onclick="doSomething()">Գնել</button>
+  <p id="button-info"></p>
 </div>
 
 <section class="products">
     <h1 class="heading" id="products">Ռոբոտաշինական <span>ապրանքներ</span></h1>
 
-    <form action="{{url_for('main.index')}}#products" method="GET">
+    <form action="{{url_for('main.index')}}#products" method="GET" id="search-form">
         <div class="container">
             <div class="select-box">
                 <div class="search">
                     <div class="search-box">
                         <input type="text" name="search" placeholder="Որոնել․․․" {% if search %}value="{{ search }}"{% endif %} />
-                        <button type="submit">Փնտրել</button>
+                        <button type="submit" form="search-form">Փնտրել</button>
                     </div>
                 </div>
                 <div class="options-container" id="categorySelect">
@@ -76,7 +80,7 @@
             <h1></h1>
             {% endif %}
             {% if product.image %}
-            <img src="{{ url_for('static', filename='img/uploads/' + product.image) }}" alt="{{ product.name }}" />
+            <img src="{{ product.image }}" alt="{{ product.name }}" />
             {% else %}
             <img src="{{ url_for('static', filename='img/default_image.jpg') }}" alt="{{ product.name }}" />
             {% endif %}

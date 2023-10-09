@@ -1,31 +1,46 @@
 {% extends "base.html" %}
 {% block title %}Login{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+{% endblock %}
 
 {% block content %}
-<div class="container">
-  <h1>Login</h1>
+<div class="back">
+  <div class="wrapper">
+    <div class="form-box login">
+      <h2>Log in</h2>
 
-  {% for message in get_flashed_messages() %}
-    <div class="alert alert-warning" role="alert">
-        {{ message }}
+      {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning" role="alert">
+          {{ message }}
+        </div>
+      {% endfor %}
+
+      <form method="POST">
+        {{ form.hidden_tag() }}
+        <div class="input-box">
+          <span class="icon">
+            <i class="fa-solid fa-envelope"></i>
+          </span>
+          {{ form.username(id="Username") }}
+          {{ form.username.label(for="Username") }}
+        </div>
+        <div class="input-box">
+          <span class="icon">
+            <i class="fa-solid fa-lock"></i>
+          </span>
+          {{ form.password(id="Password") }}
+        {{ form.password.label(for="Password") }}
+        </div>
+        <div class="remember-forgot">
+          {{ form.remember_me(id="RememberMe") }}
+          {{ form.remember_me.label(for="RememberMe") }}
+        </div>
+        {{ form.submit(class="gradient-btn") }}
+      </form>
     </div>
-  {% endfor %}
-
-  <form method="POST">
-      {{ form.hidden_tag() }}
-      <div class="form-group">
-        {{ form.username.label(for="exampleInputEmail1") }}
-        {{ form.username(class="form-control", id="exampleInputEmail1") }}
-      </div>
-      <div class="form-group">
-        {{ form.password.label(for="exampleInputPassword1") }}
-        {{ form.password(class="form-control", id="exampleInputPassword1") }}
-      </div>
-      <div class="form-check">
-        {{ form.remember_me(class="form-check-input", id="exampleCheck1") }}
-        {{ form.remember_me.label(class="form-check-label", for="exampleCheck1") }}
-      </div>
-      {{ form.submit(class="btn btn-primary") }}
-    </form>
+  </div>
 </div>
 {% endblock %}
+
+{% block footer %}{% endblock %}
