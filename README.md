@@ -2,7 +2,7 @@
 
 > A Flask web storefront and admin panel for browsing and managing robotics components, with category filtering, search, and Firebase-hosted product images.
 
-<!-- **Live demo:** `[INSERT_LIVE_DEMO_URL]` -->
+**Frontend UI Preview:** https://gasparyanvazgen.github.io/robotics-store *(static UI showcase only — Flask backend, database filtering, and `/admin` panel are not active on this link)*
 
 ---
 
